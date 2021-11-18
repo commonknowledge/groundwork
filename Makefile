@@ -32,7 +32,7 @@ pre-commit-install:
 	poetry run pre-commit install
 
 .PHONY: bootstrap
-bootstrap: poetry-download install pre-commit-install migrate
+bootstrap: poetry-download install pre-commit-install
 
 #* Formatters
 .PHONY: codestyle
