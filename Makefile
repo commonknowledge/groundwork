@@ -54,7 +54,6 @@ deploy-docs:
 #* Linting
 .PHONY: test
 test:
-	poetry run pytest -c pyproject.toml
 
 
 .PHONY: check-codestyle
@@ -65,7 +64,6 @@ check-codestyle:
 
 .PHONY: mypy
 mypy:
-	poetry run mypy --config-file pyproject.toml ./
 
 .PHONY: check-safety
 check-safety:
