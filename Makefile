@@ -22,17 +22,15 @@ migrate:
 #* Installation
 .PHONY: install
 install:
-	poetry lock -n && poetry export --without-hashes > requirements.txt
 	poetry install -n
 	-poetry run mypy --install-types --non-interactive ./
-	yarn
 
 .PHONY: pre-commit-install
 pre-commit-install:
 	poetry run pre-commit install
 
 .PHONY: bootstrap
-bootstrap: poetry-download install pre-commit-install
+bootstrap: install pre-commit-install
 
 #* Formatters
 .PHONY: codestyle
@@ -44,7 +42,7 @@ codestyle:
 .PHONY: formatting
 formatting: codestyle
 
-#* Linting
+#* Documentation
 .PHONY: serve-docs
 serve-docs:
 	poetry run mkdocs serve -a localhost:8001
@@ -52,7 +50,6 @@ serve-docs:
 .PHONY: deploy-docs
 serve-docs:
 	poetry run mkdocs gh-deploy --force
-
 
 #* Linting
 .PHONY: test
