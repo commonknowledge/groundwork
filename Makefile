@@ -45,9 +45,20 @@ codestyle:
 formatting: codestyle
 
 #* Linting
+.PHONY: serve-docs
+serve-docs:
+	poetry run mkdocs serve -a localhost:8001
+
+.PHONY: deploy-docs
+serve-docs:
+	poetry run mkdocs gh-deploy --force
+
+
+#* Linting
 .PHONY: test
 test:
 	poetry run pytest -c pyproject.toml
+
 
 .PHONY: check-codestyle
 check-codestyle:
