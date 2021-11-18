@@ -48,7 +48,7 @@ serve-docs:
 	poetry run mkdocs serve -a localhost:8001
 
 .PHONY: deploy-docs
-serve-docs:
+deploy-docs:
 	poetry run mkdocs gh-deploy --force
 
 #* Linting
