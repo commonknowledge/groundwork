@@ -6,7 +6,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 name = "pycommonknowledge"
 version = "0.1.0"
-description = "An integrated and opinionated collection of Django applications and javascript components addressing needs for people building software for organisers and campaigners."
+description = "An integrated and opinionated collection of Django applications and Javascript components addressing needs for people building software for organisers and campaigners."
 readme = "README.md"
 authors = ["Common Knowledge <hello@commonknowledge.coop>"]
 license = "GNU GPL v3.0"

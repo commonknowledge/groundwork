@@ -971,7 +971,7 @@ yaml = ["pyyaml"]
 [[package]]
 name = "telepath"
 version = "0.2"
-description = "A library for exchanging data between Python and JavaScript"
+description = "A library for exchanging data between Python and Javascript"
 category = "dev"
 optional = false
 python-versions = ">=3.5"
