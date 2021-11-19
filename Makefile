@@ -29,8 +29,13 @@ install:
 pre-commit-install:
 	poetry run pre-commit install
 
+.PHONY: migrate
+migrate:
+	poetry run python manage.py migrate
+
 .PHONY: bootstrap
-bootstrap: install pre-commit-install
+bootstrap: install pre-commit-install migrate
+	touch local.py
 
 #* Formatters
 .PHONY: codestyle
