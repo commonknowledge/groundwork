@@ -83,7 +83,7 @@ exclude = '''
 
 [tool.isort]
 # https://github.com/timothycrosley/isort/
-py_version = 38
+py_version = 39
 line_length = 88
 
 known_typing = ["typing", "types", "typing_extensions", "mypy", "mypy_extensions"]
@@ -113,7 +113,7 @@ show_error_codes = true
 show_error_context = true
 strict_equality = true
 strict_optional = true
-warn_no_return = true
+warn_no_return = false
 warn_redundant_casts = true
 warn_return_any = true
 warn_unreachable = true
