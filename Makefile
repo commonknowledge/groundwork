@@ -55,6 +55,7 @@ deploy-docs:
 #* Linting
 .PHONY: test
 test:
+	poetry run python manage.py test test/*
 
 
 .PHONY: check-codestyle
