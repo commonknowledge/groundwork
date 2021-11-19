@@ -11,9 +11,9 @@ We love development containers. They keep your development environment in a VM a
 ### In Visual Studio Code
 
 1. From the command palette select "Remote Containers: Clone Repository in Named Container Volume".
-* Enter: `git@github.com:commonknowledge/pycommonknowledge.git`.
-* Choose a development container to install to, or create a new one.
-* Wait for the container to initialize and the project bootstrap scripts to finish.
+2. Enter: `git@github.com:commonknowledge/pycommonknowledge.git`.
+3. Choose a development container to install to, or create a new one.
+4. Wait for the container to initialize and the project bootstrap scripts to finish.
 
 
 ### More information
@@ -29,6 +29,6 @@ We love development containers. They keep your development environment in a VM a
     - Python 3.9+
     - Poetry
     
-* Follow the installation instructions for [DjangoGIS's local dependencies](https://docs.djangoproject.com/en/3.2/ref/contrib/gis/install/postgis/).
-* Ensure that you have the `DATABASE_URL` environmental variable pointing to a local postgres database.
-* Clone the repository and run `make bootstrap`.
+2. Follow the installation instructions for [DjangoGIS's local dependencies](https://docs.djangoproject.com/en/3.2/ref/contrib/gis/install/postgis/).
+3. Ensure that you have the `DATABASE_URL` environmental variable pointing to a local postgres database.
+4. Clone the repository and run `make bootstrap`.
