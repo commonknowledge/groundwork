@@ -15,10 +15,6 @@ poetry-download:
 poetry-remove:
 	curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | $(PYTHON) - --uninstall
 
-.PHONY: migrate
-migrate:
-	poetry run python manage.py migrate
-
 #* Installation
 .PHONY: install
 install:
@@ -69,6 +65,7 @@ check-codestyle:
 
 .PHONY: mypy
 mypy:
+	poetry run mypy .
 
 .PHONY: check-safety
 check-safety:
