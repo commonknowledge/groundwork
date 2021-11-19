@@ -1,0 +1,4 @@
+node_modules
+.devcontainer
+.github
+.*_cache
