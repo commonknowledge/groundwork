@@ -10,10 +10,13 @@ def django_cached(prefix: str, get_key: Any = None, ttl: int = 500) -> Callable[
     """
     Decorator to cache a function using the default cache.
 
-    Attributes:
-        get_key -- Return a cache key given the arguments to the function
-        prefix -- Prefix applied to the cache key
-        ttl -- TTL in seconds
+    Args:
+        get_key: Return a cache key given the arguments to the function
+        prefix: Prefix applied to the cache key
+        ttl: TTL in seconds
+
+    Returns:
+        A function decorator
     """
 
     def decorator(fn):
@@ -41,13 +44,15 @@ def django_cached_model_property(
     prefix: str, get_key: Any = None, ttl: int = 500
 ) -> Callable[[T], T]:
     """
-    Decorator to cache an attribute of a model by id using the default cache.
-    Works like django_cached, except the cache key is prefixed with the id of the model.
+    Decorator to cache a model method using the default cache, scoped to the model instance.
 
-    Attributes:
-        get_key -- Return a cache key given the arguments to the function
-        prefix -- Prefix applied to the cache key
-        ttl -- TTL in seconds
+    Args:
+        get_key: Return a cache key given the arguments to the function
+        prefix: Prefix applied to the cache key
+        ttl: TTL in seconds
+
+    Returns:
+        A method decorator
     """
 
     if get_key is None:

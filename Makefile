@@ -63,12 +63,15 @@ deploy-docs:
 test:
 	poetry run python manage.py test test/*
 
-
 .PHONY: check-codestyle
 check-codestyle:
 	poetry run isort --diff --check-only --settings-path pyproject.toml ./
 	poetry run black --diff --check --config pyproject.toml ./
-	poetry run darglint --verbosity 2 pycommonknowledge tests
+	poetry run darglint --docstring-style google --verbosity 2 pyck
+
+.PHONY: pylint
+lint:
+	poetry run pylint .
 
 .PHONY: mypy
 mypy:
