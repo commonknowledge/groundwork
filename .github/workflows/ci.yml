@@ -4,10 +4,13 @@ on:
     branches:
       - main
 jobs:
+
   lint-and-test:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/commonknowledge/do-app-baseimage-django-node:364385f9d196a2bbe2d5faea025520cc0316501f
+      # Workaround for: https://github.com/actions/checkout/issues/211
+      options: --user 1001
       volumes:
         - "/home/runner/docker/.cache:/home/app/.cache"
       env:
