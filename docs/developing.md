@@ -4,7 +4,9 @@
 
 We love development containers. They keep your development environment in a VM and isolated from the rest of your device which is good security practice. They also make it extremely easy to share editor configurations and development dependencies that can't be managed using language package managers.
 
-Much as we hate to stan Microsoft, it's the easiest option to work on this library.
+[Much as](https://theintercept.com/2020/07/14/microsoft-police-state-mass-surveillance-facial-recognition/) we hate to [stan](https://devblogs.microsoft.com/azuregov/federal-agencies-continue-to-advance-capabilities-with-azure-government/) [Microsoft](https://en.wikipedia.org/wiki/Embrace,_extend,_and_extinguish), it's the easiest option to work on this library.
+
+(you may be interested in trying out [VSCodium](https://vscodium.com/), an opensource distribution of VSCode)
 
 ### In Visual Studio Code
 
