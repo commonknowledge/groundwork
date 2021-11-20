@@ -1,8 +1,8 @@
-import * as path from 'path'
-import { defineConfig } from 'vite'
-import legacy from '@vitejs/plugin-legacy'
+import * as path from "path";
+import { defineConfig } from "vite";
+import legacy from "@vitejs/plugin-legacy";
 
-import { peerDependencies } from './package.json'
+import { peerDependencies } from "./package.json";
 
 export default defineConfig(({ mode }) => {
   // Bundled mode:
@@ -14,36 +14,39 @@ export default defineConfig(({ mode }) => {
   // - Some dependencies included in bundle.
   // - Some dependencies externalised (see package.json peerDependencies field)
 
-  const isBundled = mode === 'bundled'
-  const entrypoint = isBundled ? 'register.ts' : 'register.ts'
+  const isBundled = mode === "bundled";
+  const entrypoint = isBundled ? "register.ts" : "register.ts";
 
   return {
-    base: '/static/',
+    base: "/static/",
     plugins: compact([
-      isBundled && legacy({
-        polyfills: false,
-        targets: ['defaults', 'not IE 11']
-      })
+      isBundled &&
+        legacy({
+          polyfills: false,
+          targets: ["defaults", "not IE 11"],
+        }),
     ]),
     build: {
       emptyOutDir: true,
       rollupOptions: {
         external: isBundled ? [] : Object.keys(peerDependencies),
         output: {
-          dir: isBundled ? 'static/' : 'dist/'
+          dir: isBundled ? "pyck/core/static/" : "dist/",
         },
         input: {
-          main: `pyck/core/frontend/${entrypoint}`
-        }
+          main: `pyck/core/frontend/${entrypoint}`,
+        },
       },
-      lib: isBundled ? undefined : {
-        entry: path.resolve(__dirname, `pyck/core/frontend/${entrypoint}`),
-        formats: isBundled ? ['cjs'] : ['es'],
-        name: 'pyck',
-        fileName: () => `index.js`
-      },
-    }
-  }
-})
+      lib: isBundled
+        ? undefined
+        : {
+            entry: path.resolve(__dirname, `pyck/core/frontend/${entrypoint}`),
+            formats: isBundled ? ["cjs"] : ["es"],
+            name: "pyck",
+            fileName: () => `index.js`,
+          },
+    },
+  };
+});
 
-const compact = array => array.filter(item => !!item)
+const compact = (array) => array.filter((item) => !!item);

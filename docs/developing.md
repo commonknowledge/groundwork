@@ -13,20 +13,17 @@ We love development containers. They keep your development environment in a VM a
 3. Choose a development container to install to, or create a new one.
 4. Wait for the container to initialize and the project bootstrap scripts to finish.
 
-
 ### More information
 
 - [VSCode Development Containers](https://code.visualstudio.com/docs/remote/containers)
 
-
 ## Hard mode: Do it yourself
 
 1. Ensure that you have the following installed:
-    - NodeJS
-    - Yarn
-    - Python 3.9+
-    - Poetry
-    
+   - NodeJS
+   - Yarn
+   - Python 3.9+
+   - Poetry
 2. Follow the installation instructions for [DjangoGIS's local dependencies](https://docs.djangoproject.com/en/3.2/ref/contrib/gis/install/postgis/).
 3. Ensure that you have the `DATABASE_URL` environmental variable pointing to a local postgres database.
 4. Clone the repository and run `make bootstrap`.

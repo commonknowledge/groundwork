@@ -1,0 +1,5 @@
+# Ignore artifacts:
+dist
+static
+node_modules
+.*_cache

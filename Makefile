@@ -41,6 +41,7 @@ codestyle:
 	poetry run pyupgrade --exit-zero-even-if-changed --py38-plus **/*.py
 	poetry run isort --settings-path pyproject.toml ./
 	poetry run black --config pyproject.toml ./
+	yarn prettier --write .
 
 .PHONY: formatting
 formatting: codestyle
@@ -68,6 +69,7 @@ check-codestyle:
 	poetry run isort --diff --check-only --settings-path pyproject.toml ./
 	poetry run black --diff --check --config pyproject.toml ./
 	poetry run darglint --docstring-style google --verbosity 2 pyck
+	yarn prettier --check .
 
 .PHONY: mypy
 mypy:

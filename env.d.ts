@@ -1,3 +1,3 @@
 /// <reference types="vite/client" />
 
-declare module 'stimulus-controller-resolver'
+declare module "stimulus-controller-resolver";
