@@ -24,7 +24,8 @@
 
 ## Checklist:
 <!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
-- [ ] I have documented all new functionality using docstrings.
+- [ ] I have documented all new methods using google docstring format.
+- [ ] I have added type annotations to any public API methods.
 - [ ] I have updated any relevant high-level documentation.
-- [ ] I have added a usage example to the example app.
+- [ ] I have added a usage example to the example app if relevant.
 - [ ] I have written tests covering all new changes.

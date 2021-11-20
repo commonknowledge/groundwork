@@ -6,6 +6,7 @@ nav:
     - Contributing:
         - Contribution Guidelines: contributing.md
         - Developer Setup: developing.md
+        - Code Style: code-style.md
 theme:
     name: material
     features:
