@@ -1,0 +1,3 @@
+import startApp from ".";
+
+startApp()

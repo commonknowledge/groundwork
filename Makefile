@@ -31,7 +31,7 @@ migrate:
 
 .PHONY: bootstrap
 bootstrap: install pre-commit-install migrate
-	touch local.py
+	touch local.py@We
 
 
 #* Formatters
@@ -69,10 +69,6 @@ check-codestyle:
 	poetry run black --diff --check --config pyproject.toml ./
 	poetry run darglint --docstring-style google --verbosity 2 pyck
 
-.PHONY: pylint
-lint:
-	poetry run pylint .
-
 .PHONY: mypy
 mypy:
 	poetry run mypy .
@@ -81,10 +77,18 @@ mypy:
 check-safety:
 	poetry check
 	poetry run safety check --full-report
-	poetry run bandit -ll --recursive pycommonknowledge tests
+	poetry run bandit -ll --recursive pyck tests
 
 .PHONY: lint
 lint: test check-codestyle mypy check-safety
+
+
+#* Assets
+
+.PHONY: build
+build:
+	yarn vite build --mode bundled
+	yarn vite build
 
 
 #* Cleaning
