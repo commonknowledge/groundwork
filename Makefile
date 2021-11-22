@@ -63,6 +63,7 @@ deploy-docs:
 .PHONY: test
 test:
 	poetry run python manage.py test test/*
+	yarn test
 
 .PHONY: check-codestyle
 check-codestyle:

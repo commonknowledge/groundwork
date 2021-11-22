@@ -1,6 +1,7 @@
 import * as path from "path";
 import { defineConfig } from "vite";
 import legacy from "@vitejs/plugin-legacy";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 import { peerDependencies } from "./package.json";
 
@@ -15,11 +16,16 @@ export default defineConfig(({ mode }) => {
   // - Some dependencies externalised (see package.json peerDependencies field)
 
   const isBundled = mode === "bundled";
-  const entrypoint = isBundled ? "register.ts" : "register.ts";
+  const isDev = mode === "dev";
+  const entrypoint = isBundled ? "register.ts" : "index.ts";
 
   return {
     base: "/static/",
+    optimizeDeps: {
+      entries: ["./pyck/core/frontend/index.ts"],
+    },
     plugins: compact([
+      tsconfigPaths(),
       isBundled &&
         legacy({
           polyfills: false,
@@ -37,14 +43,18 @@ export default defineConfig(({ mode }) => {
           main: `pyck/core/frontend/${entrypoint}`,
         },
       },
-      lib: isBundled
-        ? undefined
-        : {
-            entry: path.resolve(__dirname, `pyck/core/frontend/${entrypoint}`),
-            formats: isBundled ? ["cjs"] : ["es"],
-            name: "pyck",
-            fileName: () => `index.js`,
-          },
+      lib:
+        isBundled || isDev
+          ? undefined
+          : {
+              entry: path.resolve(
+                __dirname,
+                `pyck/core/frontend/${entrypoint}`
+              ),
+              formats: isBundled ? ["cjs"] : ["es"],
+              name: "pyck",
+              fileName: () => `index.js`,
+            },
     },
   };
 });
