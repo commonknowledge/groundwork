@@ -1,5 +1,3 @@
-# Developing
-
 ## Easy mode: Development containers
 
 We love development containers. They keep your development environment in a VM and isolated from the rest of your device which is good security practice. They also make it extremely easy to share editor configurations and development dependencies that can't be managed using language package managers.

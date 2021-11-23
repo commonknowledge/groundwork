@@ -1,6 +1,14 @@
 site_name: PyCommonknowledge
 site_url: https://commonknowledge.github.io/pycommonknowledge/
+repo_url: https://github.com/commonknowledge/pycommonknowledge/
 nav:
-    - Home: index.md
-    - Developing: developing.md
-theme: material
+    - index.md
+    - Contributing:
+        - Contribution Guidelines: contributing.md
+        - Developer Setup: developing.md
+theme:
+    name: material
+    features:
+        - navigation.instant
+        - navigation.tabs
+        - navigation.tabs.sticky
