@@ -8,7 +8,7 @@ import { resolveablePromise } from "~core/util/promise-utils";
  * Subclassers should override `connectMap` and `disconnectMap`, and/or implement their own event handlers to configure
  * the mapbox instance with controls, data sources, custom layers, etc.
  */
-export class MapConfigController extends Controller {
+export class MapConfigController<T = void> extends Controller {
   map?: mapboxgl.Map;
   ready = resolveablePromise();
 

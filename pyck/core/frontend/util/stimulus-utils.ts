@@ -14,7 +14,7 @@ export const getReferencedData = <T>(data: string): T | undefined => {
   }
 
   if (data.startsWith("#")) {
-    const json = document.querySelector(data)?.innerHTML;
+    const json = document.querySelector(data)?.textContent;
     return json ? JSON.parse(json) : undefined;
   }
 

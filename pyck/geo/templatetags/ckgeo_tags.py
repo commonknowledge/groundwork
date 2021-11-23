@@ -1,7 +1,6 @@
 from typing import Any, Dict, Optional
 
-import re
-from itertools import zip_longest
+import functools
 
 from django import template
 from django.conf import settings
@@ -74,3 +73,25 @@ def map(
             "slots": children.render(context) if children else "",
         }
     )
+
+
+@register.inclusion_tag("pyck/geo/components/map_config.html")
+def map_source(id, data):
+    ref = "map_source_config"
+
+    return {
+        "controller": "map-source",
+        "values": {"id": id, "data": "#" + ref},
+        "json": {ref: data},
+    }
+
+
+@register.inclusion_tag("pyck/geo/components/map_config.html")
+def map_layer(layer):
+    ref = "map_layer_config"
+
+    return {
+        "controller": "map-layer",
+        "values": {"layer": "#" + ref},
+        "json": {ref: layer},
+    }
