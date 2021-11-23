@@ -1,0 +1,12 @@
+<{{element}}
+  {% for key, val in attrs %}
+    {% if val %}{{key}}="{{val}}"{% endif %}
+  {% endfor %}
+  {% for key, val in values %}
+    {% if val %}data-map-{{key}}-value="{{val}}"{% endif %}
+  {% endfor %}
+  data-controller="map"
+>
+  {{slots}}
+  <div data-map-target="canvas"></div>
+</{{element}}>
