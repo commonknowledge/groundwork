@@ -21,7 +21,6 @@ Some additional pointers:
 - Ensure that you have good test coverage of both Python and Javascript components and all public API methods are documented.
 - These changes are always a good opportuntiy to improve test coverage of the exsting functionality. Think about how your changes may lead to regressions to the existing functionality and add tests to guard against them.
 
-
 ## Improvements to documentation
 
 Yes please!

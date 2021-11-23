@@ -1,0 +1,7 @@
+{
+  "python.pythonPath": "/home/vscode/.cache/pypoetry/virtualenvs/pycommonknowledge-SsXfCHgY-py3.9/bin/python",
+  "python.linting.pylintEnabled": false,
+  "python.linting.mypyEnabled": true,
+  "python.linting.banditEnabled": true,
+  "python.languageServer": "Jedi"
+}
