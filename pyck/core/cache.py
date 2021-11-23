@@ -3,10 +3,10 @@ from typing import Any, Callable, TypeVar
 from django.core.cache import cache
 from django.db.models import QuerySet
 
-T = TypeVar("T", bound=Callable[..., Any])
+from pyck.core.types import Decorator
 
 
-def django_cached(prefix: str, get_key: Any = None, ttl: int = 500) -> Callable[[T], T]:
+def django_cached(prefix: str, get_key: Any = None, ttl: int = 500) -> Decorator:
     """
     Decorator to cache a function using the default cache.
 
@@ -42,7 +42,7 @@ def django_cached(prefix: str, get_key: Any = None, ttl: int = 500) -> Callable[
 
 def django_cached_model_property(
     prefix: str, get_key: Any = None, ttl: int = 500
-) -> Callable[[T], T]:
+) -> Decorator:
     """
     Decorator to cache a model method using the default cache, scoped to the model instance.
 
