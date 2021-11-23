@@ -3,3 +3,4 @@ dist
 static
 node_modules
 .*_cache
+*.html

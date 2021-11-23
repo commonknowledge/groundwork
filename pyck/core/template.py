@@ -15,11 +15,22 @@ def register_block_tag(
     name: Optional[str] = None,
 ) -> Decorator:
     """
+    Helper for creating and registering a template tag that contains a block of html _and_ accepts args and kwargs similarly to the `@simple_tag` decorator.
+
     Wrap a callable in a parser, passing its args and kwargs to the wrapped callable, along with
     its content nodelist as the `children` kwarg.
 
     The implementation is identical to Django's inbuilt Library.simple_tag, except that it continues to
-    parse up to an end marker, which defaults to "end" prepended to the tag name.
+    parse up to an end marker.
+
+    Args:
+        library: The tags library to register the tag with.
+        takes_context: Whether the tag accepts its parent context. Note that the block's content _always_ receives its parent context. If provided, the decorated function must have `context` as its first parameter.
+        name: The name of the template tag. Defaults to the function name.
+        upto: Override the tag signifying the end of the html block. Defaults to "end" prepended to the tag name.
+
+    Returns:
+        A decorator that can be used similarly to @simple_tag
     """
 
     def dec(func):

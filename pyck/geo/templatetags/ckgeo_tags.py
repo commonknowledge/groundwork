@@ -51,6 +51,9 @@ def map(
 
     Returns:
         Rendered html for a map widget.
+
+    # noqa: DAR101 context
+    # noqa: DAR101 children
     """
     if api_key is None:
         api_key = getattr(settings, "MAPBOX_PUBLIC_API_KEY", None)
