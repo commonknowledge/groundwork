@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load ckgeo_tags %}
+
+{% block content %}
+
+{% map class="vw-100 vh-100" center="[4.53,52.22]" zoom=9 %}
+  {% for id, data in view.sources.items %}
+  {% endfor %}
+
+  {% for layer in view.layers %}
+  {% endfor %}
+{% endmap %}
+
+{% endblock %}

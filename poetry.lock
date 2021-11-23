@@ -10,7 +10,7 @@ python-versions = ">=3.3"
 name = "asgiref"
 version = "3.4.1"
 description = "ASGI specs, helper code, and adapters"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -202,7 +202,7 @@ python-versions = "*"
 name = "django"
 version = "3.2.9"
 description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -261,6 +261,17 @@ python-versions = ">=3.6"
 
 [package.dependencies]
 Django = ">=2.2"
+
+[[package]]
+name = "django-vite"
+version = "1.2.1"
+description = "Integration of ViteJS in a Django project."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+Django = ">=1.11"
 
 [[package]]
 name = "djangorestframework"
@@ -788,7 +799,7 @@ six = ">=1.5"
 name = "pytz"
 version = "2021.3"
 description = "World timezone definitions, modern and historical"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -930,7 +941,7 @@ python-versions = ">=3.6"
 name = "sqlparse"
 version = "0.4.2"
 description = "A non-validating SQL parser."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.5"
 
@@ -971,7 +982,7 @@ yaml = ["pyyaml"]
 [[package]]
 name = "telepath"
 version = "0.2"
-description = "A library for exchanging data between Python and Javascript"
+description = "A library for exchanging data between Python and JavaScript"
 category = "dev"
 optional = false
 python-versions = ">=3.5"
@@ -1172,7 +1183,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "2a49a942b0159a03a843365fed1dda3b04360be4ce5af2ffa105e4c7ddf4020d"
+content-hash = "6638e894183d9ef11a311fb1eacd5e8c3b61c26a904654931ea88210cc79ab30"
 
 [metadata.files]
 anyascii = [
@@ -1267,6 +1278,10 @@ django-taggit = [
 django-treebeard = [
     {file = "django-treebeard-4.5.1.tar.gz", hash = "sha256:80150017725239702054e5fa64dc66e383dc13ac262c8d47ee5a82cb005969da"},
     {file = "django_treebeard-4.5.1-py3-none-any.whl", hash = "sha256:7c2b1cdb1e9b46d595825186064a1228bc4d00dbbc186db5b0b9412357fba91c"},
+]
+django-vite = [
+    {file = "django-vite-1.2.1.tar.gz", hash = "sha256:b2f645dc3fb367699063bacecf4ac1c375dae539b63ee33e7b18458744464392"},
+    {file = "django_vite-1.2.1-py3-none-any.whl", hash = "sha256:68332226cb72b9a3b8d4c155926dbbcd83b5855380a0776baed7280ef15e2185"},
 ]
 djangorestframework = [
     {file = "djangorestframework-3.12.4-py3-none-any.whl", hash = "sha256:6d1d59f623a5ad0509fe0d6bfe93cbdfe17b8116ebc8eda86d45f6e16e819aaf"},

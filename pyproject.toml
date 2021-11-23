@@ -40,6 +40,7 @@ schedule = "^1.1.0"
 
 [tool.poetry.dev-dependencies]
 django = '^3.2.3'
+django-vite = "^1.2.1"
 wagtail = '^2.13'
 bandit = "^1.7.0"
 black = {version = "^21.7b0", allow-prereleases = true}

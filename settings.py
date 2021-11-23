@@ -20,7 +20,10 @@ SECRET_KEY = (
 
 INSTALLED_APPS = [
     "pyck.core",
+    "pyck.geo",
     "test",
+    "example",
+    "django_vite",
     "django.contrib.gis",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -149,6 +152,8 @@ STATIC_URL = "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+
+DJANGO_VITE_ASSETS_PATH = "/static"
 
 
 # Wagtail settings
