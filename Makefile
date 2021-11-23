@@ -19,7 +19,8 @@ poetry-remove:
 .PHONY: install
 install:
 	poetry install -n
-	-poetry run mypy --install-types --non-interactive ./
+	poetry run mypy --install-types --non-interactive ./
+	yarn
 
 .PHONY: pre-commit-install
 pre-commit-install:
@@ -31,7 +32,7 @@ migrate:
 
 .PHONY: bootstrap
 bootstrap: install pre-commit-install migrate
-	touch local.py@We
+	touch local.py
 
 
 #* Formatters
