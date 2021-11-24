@@ -3,6 +3,12 @@ site_url: https://commonknowledge.github.io/pycommonknowledge/
 repo_url: https://github.com/commonknowledge/pycommonknowledge/
 nav:
   - index.md
+  - Reference:
+      - Core:
+        - Cache Utils: api/pyck.core.cache.md
+        - Template Utils: api/pyck.core.template.md
+      - Geo:
+        - Components: pyck/geo/docs/components.md
   - Contributing:
       - Contribution Guidelines: contributing.md
       - Developer Setup: developing.md
@@ -13,3 +19,12 @@ theme:
     - navigation.instant
     - navigation.tabs
     - navigation.tabs.sticky
+    - navigation.indexes
+markdown_extensions:
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets
+  - def_list
