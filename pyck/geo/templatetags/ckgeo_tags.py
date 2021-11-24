@@ -27,33 +27,6 @@ def map(
     children: Optional[template.NodeList] = None,
     **attrs: Dict[str, str],
 ) -> template.Node:
-    """
-    Renders a mapbox map widget.
-
-    Usage:
-
-    ```
-    {% load ckgeo_tags %}
-
-    {% map class="vw-100 vh-100" center="[4.53,52.22]" zoom=9 %}
-        {% comment %} map configuration tags go here {% endcomment %}
-    {% endmap %}
-    ```
-
-    Args:
-        element: Return a cache key given the arguments to the function
-        style: Override the map style on a per-map basis. Defaults to the MAPBOX_DEFAULT_STYLE django config.
-        api_key: Override the map api key on a per-map basis. Defaults to the MAPBOX_PUBLIC_API_KEY django config.
-        center: Initial [lon,lat] location to center the map on.
-        zoom: Initial zoom value. Defaults to 9.
-        **attrs: Any additional kwargs are used as html attributes on the map.
-
-    Returns:
-        Rendered html for a map widget.
-
-    # noqa: DAR101 context
-    # noqa: DAR101 children
-    """
     if api_key is None:
         api_key = getattr(settings, "MAPBOX_PUBLIC_API_KEY", None)
 
