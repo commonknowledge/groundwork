@@ -50,27 +50,6 @@ def map(
 
 @register.inclusion_tag("pyck/geo/components/map_config.html")
 def map_source(id, data):
-    """
-    Adds a datasource to a map.
-
-    Usage:
-
-    ```
-    {% load ckgeo_tags %}
-
-    {% map %}
-        {% map_source id="my_datasource_id" data=my_datasource %}
-    {% endmap %}
-    ```
-
-    Args:
-        id: ID for the datasource made available to layers
-        data: JSON object conforming to the [Mapbox source specification](https://docs.mapbox.com/mapbox-gl-js/style-spec/sources/)
-
-    Returns:
-        Rendered html to configure the datasource.
-    """
-
     ref = "map_source_config"
 
     return {
@@ -82,26 +61,6 @@ def map_source(id, data):
 
 @register.inclusion_tag("pyck/geo/components/map_config.html")
 def map_layer(layer):
-    """
-    Adds a layer to a map.
-
-    Usage:
-
-    ```
-    {% load ckgeo_tags %}
-
-    {% map %}
-        {% map_layer layer=my_layer %}
-    {% endmap %}
-    ```
-
-    Args:
-        layer: JSON object conforming to the [Mapbox layer specification](https://docs.mapbox.com/mapbox-gl-js/style-spec/layers/)
-
-    Returns:
-        Rendered html to configure the map layer.
-    """
-
     ref = "map_layer_config"
 
     return {
