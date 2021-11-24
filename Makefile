@@ -19,7 +19,8 @@ poetry-remove:
 .PHONY: install
 install:
 	poetry install -n
-	-poetry run mypy --install-types --non-interactive ./
+	poetry run mypy --install-types --non-interactive ./
+	yarn
 
 .PHONY: pre-commit-install
 pre-commit-install:
@@ -41,6 +42,7 @@ codestyle:
 	poetry run pyupgrade --exit-zero-even-if-changed --py38-plus **/*.py
 	poetry run isort --settings-path pyproject.toml ./
 	poetry run black --config pyproject.toml ./
+	yarn prettier --write .
 
 .PHONY: formatting
 formatting: codestyle
@@ -62,16 +64,15 @@ deploy-docs:
 .PHONY: test
 test:
 	poetry run python manage.py test test/*
+	yarn test
 
 .PHONY: check-codestyle
 check-codestyle:
 	poetry run isort --diff --check-only --settings-path pyproject.toml ./
 	poetry run black --diff --check --config pyproject.toml ./
 	poetry run darglint --docstring-style google --verbosity 2 pyck
-
-.PHONY: pylint
-lint:
-	poetry run pylint .
+	yarn tsc --noemit
+	yarn prettier --check .
 
 .PHONY: mypy
 mypy:
@@ -81,10 +82,18 @@ mypy:
 check-safety:
 	poetry check
 	poetry run safety check --full-report
-	poetry run bandit -ll --recursive pycommonknowledge tests
+	poetry run bandit -ll --recursive pyck tests
 
 .PHONY: lint
 lint: test check-codestyle mypy check-safety
+
+
+#* Assets
+
+.PHONY: build
+build:
+	yarn vite build --mode bundled
+	yarn vite build
 
 
 #* Cleaning

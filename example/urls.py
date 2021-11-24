@@ -1,3 +1,5 @@
 from typing import Any, List
 
-urlpatterns: List[Any] = []
+from django.urls import include, path
+
+urlpatterns: List[Any] = [path("geo/", include("pyck.geo.examples"))]

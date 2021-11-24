@@ -1,0 +1,41 @@
+{
+  "name": "pycommonknowledge",
+  "version": "1.0.0",
+  "repository": "https://github.com/commonknowledge/pycommonknowledge.git",
+  "author": "Common Knowledge <developers@commonknowledge.coop>",
+  "license": "GPL-3.0-only",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.0.1",
+    "@hotwired/turbo": "^7.0.1",
+    "@testing-library/dom": "^8.11.1",
+    "@types/jest": "^27.0.3",
+    "@types/mapbox-gl": "^2.4.2",
+    "@vitejs/plugin-legacy": "^1.6.2",
+    "jest": "^27.3.1",
+    "mapbox-gl": "^2.6.0",
+    "mutationobserver-shim": "^0.3.7",
+    "prettier": "^2.4.1",
+    "stimulus-controller-resolver": "^2.0.1",
+    "superclusterd": "^1.1.1",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4",
+    "vite": "^2.6.14",
+    "vite-tsconfig-paths": "^3.3.17"
+  },
+  "peerDependencies": {
+    "@hotwired/stimulus": "^3.0.1"
+  },
+  "files": [
+    "dist"
+  ],
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  }
+}

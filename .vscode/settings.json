@@ -3,5 +3,10 @@
   "python.linting.pylintEnabled": false,
   "python.linting.mypyEnabled": true,
   "python.linting.banditEnabled": true,
-  "python.languageServer": "Jedi"
+  "python.languageServer": "Jedi",
+  "editor.formatOnSave": true,
+  "html.format.templating": true,
+  "[django-html]": {
+    "editor.formatOnSave": false
+  }
 }

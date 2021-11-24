@@ -1,0 +1,14 @@
+<slot
+  data-controller="{{controller}}"
+  data-map-target="config"
+  {% for key, value in values.items %}
+  {% if value %}data-{{controller}}-{{key}}-value="{{value}}"{% endif %}
+  {% endfor %}
+  {% for key, value in attributes.items %}
+  {% if value %}{{key}}="{{value}}"{% endif %}
+  {% endfor %}
+>
+</slot>
+{% for key, value in json.items %}
+{{value|json_script:key}}
+{% endfor %}
