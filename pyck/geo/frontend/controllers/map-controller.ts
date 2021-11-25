@@ -2,25 +2,13 @@ import { Controller } from "@hotwired/stimulus";
 import mapbox from "mapbox-gl";
 import { getReferencedData } from "~core/util/stimulus-utils";
 
+/**
+ * @internal
+ *
+ * Symbol used to attach mapbox instance to dom element.
+ */
 export const MAPBOX_MAP_SYMBOL = Symbol("mapbox-instance");
 
-/**
- * Controller for rendering a mapbox map.
- *
- * Required values:
- *  - `data-map-api-key-value`: A valid mapbox public api key
- *
- * Optional values:
- *  - `data-map-api-center-value`: JSON array representing a [lon,lat] pair to initially center the map on.
- *  - `data-map-zoom-value`: Initial map zoom value. Defaults to 2.
- *  - `data-map-style-value`: Style for the map. Defaults to `mapbox/streets-v11`.
- *
- * Required targets:
- *  - `data-map-target="canvas"`: An element to render the map into.
- *
- * Optional targets:
- *  - `data-map-target="config"`: One or more map config elements. These should have a controller that subclasses MapConfigController
- */
 export default class MapController extends Controller {
   static targets = ["canvas", "config"];
   static values = {

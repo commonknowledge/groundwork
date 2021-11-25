@@ -50,12 +50,23 @@ formatting: codestyle
 
 #* Documentation
 
+.PHONY: python-api-docs
+python-api-docs:
+	rm -rf docs/api/*
+	python bin/gendocs.py
+
+.PHONY: component-docs
+component-docs:
+	rm -rf docs/components
+	mkdir -p docs/components
+	cp pyck/**/docs/*.components.md docs/components/
+
 .PHONY: serve-docs
-serve-docs:
+serve-docs: component-docs python-api-docs
 	poetry run mkdocs serve -a localhost:8001
 
 .PHONY: deploy-docs
-deploy-docs:
+deploy-docs: component-docs python-api-docs
 	poetry run mkdocs gh-deploy --force
 
 

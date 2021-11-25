@@ -1,3 +1,9 @@
+---
+hide:
+  - navigation
+  - toc
+---
+
 ![Logo](./logo.png)
 
 # Pycommonknowledge
