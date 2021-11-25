@@ -8,7 +8,7 @@ nav:
         - Cache Utils: api/pyck.core.cache.md
         - Template Utils: api/pyck.core.template.md
       - Geo:
-        - Components: pyck/geo/docs/components.md
+        - Map Components: components/map.components.md
   - Contributing:
       - Contribution Guidelines: contributing.md
       - Developer Setup: developing.md
