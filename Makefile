@@ -115,7 +115,7 @@ pycache-remove:
 
 .PHONY: build-remove
 build-remove:
-	rm -rf build/
+	rm -rf build/ dist/ docs/api/ docs/components/ temp/
 
 .PHONY: clean-all
-clean-all: pycache-remove build-remove docker-remove
+clean-all: pycache-remove build-remove
