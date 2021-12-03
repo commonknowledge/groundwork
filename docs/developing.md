@@ -9,7 +9,7 @@ We love development containers. They keep your development environment in a VM a
 ### In Visual Studio Code
 
 1. From the command palette select "Remote Containers: Clone Repository in Named Container Volume".
-2. Enter: `git@github.com:commonknowledge/pycommonknowledge.git`.
+2. Enter: `git@github.com:commonknowledge/groundwork.git`.
 3. Choose a development container to install to, or create a new one.
 4. Wait for the container to initialize and the project bootstrap scripts to finish.
 

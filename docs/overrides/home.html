@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block hero %}
+<style>
+  body {
+    background-color: black;
+    background-image: url("img/components.png");
+    background-size: 50% auto;
+    background-position: right 56px;
+    background-repeat: no-repeat;
+  }
+  
+  :root {
+    --md-default-fg-color: white;
+  }
+
+  h1 {
+    font-weight: 700 !important;
+    font-size: 56px !important;
+  }
+
+  header .md-header__title > * {
+    display: none !important;
+  }
+</style>
+
+<main class="md-main" style="z-index: 1;" data-md-component="main">
+  <div class="md-main__inner md-grid">
+    <div class="md-content" data-md-component="content">
+      <article class="md-content__inner md-typeset" style="width: 50%;">
+        <h1>Groundwork</h1>
+        <p>An integrated Django and Javascript framework for people who build tools for organisers.</p>
+
+        <strong>Featuring:</strong>
+        <ul>
+          <li>Pluggable API clients for popular organising tools.</li>
+          <li>Data pipeline tools to easily pull in and store data from external services.</li>
+          <li>Easy access to open-source geographical and administrative area information.</li>
+          <li>High-level components for displaying data on maps.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</main>
+{% endblock %}
+
+
+{% block content %}
+{% endblock %}
