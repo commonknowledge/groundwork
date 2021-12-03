@@ -28,15 +28,13 @@ classifiers = [  #! Update me
   "Programming Language :: Python :: 3.9",
 ]
 
-[tool.poetry.scripts]
-# Entry points for the package https://python-poetry.org/docs/pyproject/#scripts
-"pycommonknowledge" = "commonknowledge.__main__:app"
-
 [tool.poetry.dependencies]
 python = "^3.9"
 typer = {extras = ["all"], version = "^0.3.2"}
 rich = "^10.7.0"
 schedule = "^1.1.0"
+djangorestframework-camel-case = "^1.2.0"
+djangorestframework-dataclasses = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
 django = '^3.2.3'
@@ -57,6 +55,7 @@ psycopg2 = '>=2.8.6'
 pydocstyle = "^6.1.1"
 pylint = "^2.10.2"
 pytest = "^6.2.4"
+pytest-django = "^4.4.0"
 pyupgrade = "^2.24.0"
 safety = "^1.10.3"
 
@@ -98,7 +97,7 @@ color_output = true
 
 [tool.mypy]
 # https://mypy.readthedocs.io/en/latest/config_file.html#using-a-pyproject-toml-file
-python_version = 3.8
+python_version = 3.9
 pretty = true
 show_traceback = true
 color_output = true
@@ -136,3 +135,10 @@ addopts = [
   "--doctest-modules",
   "--doctest-continue-on-failure",
 ]
+
+markers = [
+    "integration_test: marks tests as integrtation tests (not run in make lint)",
+]
+
+DJANGO_SETTINGS_MODULE = "settings"
+python_files = "tests.py test_*.py *_tests.py"
