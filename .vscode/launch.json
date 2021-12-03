@@ -16,34 +16,6 @@
   ],
   "configurations": [
     {
-      "name": "Test current Django test",
-      "type": "python",
-      "request": "launch",
-      "program": "${workspaceFolder}/manage.py",
-      "args": ["test", "${file}"],
-      "justMyCode": true,
-      "django": true,
-      "presentation": {
-        "hidden": false,
-        "group": "",
-        "order": 2
-      }
-    },
-    {
-      "name": "Run all Django tests",
-      "type": "python",
-      "request": "launch",
-      "program": "${workspaceFolder}/manage.py",
-      "args": ["test", "test/*"],
-      "justMyCode": true,
-      "django": true,
-      "presentation": {
-        "hidden": false,
-        "group": "",
-        "order": 3
-      }
-    },
-    {
       "name": "django-runserver",
       "type": "python",
       "request": "launch",
@@ -51,6 +23,22 @@
       "args": ["runserver"],
       "justMyCode": true,
       "django": true
+    },
+    {
+      "name": "django-run-cron-tasks",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": ["run_cron_tasks", "--once"],
+      "justMyCode": true,
+      "django": true
+    },
+    {
+      "name": "gendocs",
+      "type": "python",
+      "request": "launch",
+      "program": "bin/gendocs.py",
+      "justMyCode": true
     },
     {
       "name": "vite-dev",
@@ -72,6 +60,9 @@
       "program": "${workspaceFolder}/node_modules/.bin/jest",
       "windows": {
         "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+      },
+      "presentation": {
+        "hidden": true
       }
     }
   ]
