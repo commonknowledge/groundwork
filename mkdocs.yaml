@@ -3,12 +3,20 @@ site_url: https://commonknowledge.github.io/pycommonknowledge/
 repo_url: https://github.com/commonknowledge/pycommonknowledge/
 nav:
   - index.md
+  - Guides:
+      - Data Pipeline: guides/data-pipeline.md
   - Reference:
       - Core:
-        - Cache Utils: api/pyck.core.cache.md
-        - Template Utils: api/pyck.core.template.md
+          - Data sources: api/pyck.core.datasources.md
+          - Cron tasks: api/pyck.core.cron.md
+          - Utilities:
+              - Cache utils: api/pyck.core.cache.md
+              - Template utils: api/pyck.core.template.md
       - Geo:
-        - Map Components: components/map.components.md
+          - Map Components: components/map.components.md
+          - UK Geographical Data:
+              - Postcode Geolocation: api/pyck.geo.territories.uk.postcodes.md
+              - Parliament API: api/pyck.geo.territories.uk.parliament.md
   - Contributing:
       - Contribution Guidelines: contributing.md
       - Developer Setup: developing.md
@@ -22,9 +30,11 @@ theme:
     - navigation.indexes
 markdown_extensions:
   - pymdownx.tabbed:
-      alternate_style: true 
+      alternate_style: true
+  - admonition
+  - def_list
+  - pymdownx.details
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.superfences
   - pymdownx.snippets
-  - def_list
