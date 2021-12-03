@@ -19,7 +19,6 @@ poetry-remove:
 .PHONY: install
 install:
 	poetry install -n
-	poetry run mypy --install-types --non-interactive ./
 	yarn
 
 .PHONY: pre-commit-install
