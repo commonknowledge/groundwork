@@ -41,7 +41,6 @@
     "ms-python.python",
     "mtxr.sqltools",
     "mtxr.sqltools-driver-pg",
-    "matangover.mypy",
     "esbenp.prettier-vscode",
     "orta.vscode-jest"
   ],
