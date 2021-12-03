@@ -107,12 +107,30 @@ ci: lint
 	yarn test
 
 
-#* Assets
+#* Build & release flow
 
-.PHONY: build
-build:
+.PHONY: set-release-version
+set-release-version:
+	release_version=$$(poetry run python bin/get_release_version.py)
+
+	yarn version --new-version $$release_version
+	poetry version $$release_version
+
+.PHONY: build-js
+build-js:
 	yarn vite build --mode bundled
+	yarn vite build --mode test-utils
 	yarn vite build
+
+.PHONY: build-python
+build-python: set-release-version build-js
+	echo poetry build
+
+.PHONY: release
+release: clean-all set-release-version build-js build-python
+	yarn publish
+	poetry publish
+
 
 
 #* Cleaning
@@ -123,7 +141,7 @@ pycache-remove:
 
 .PHONY: build-remove
 build-remove:
-	rm -rf build/ dist/ docs/api/ docs/components/ temp/
+	rm -rf build/ pyck/core/static/ docs/api/ docs/components/ temp/
 
 .PHONY: clean-all
 clean-all: pycache-remove build-remove

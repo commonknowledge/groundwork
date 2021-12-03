@@ -11,7 +11,7 @@
     "skipLibCheck": true,
     "paths": {
       "~core/*": ["./pyck/core/frontend/*"],
-      "~geo/*": ["./pyck/geo/frontenwd/*"]
+      "~geo/*": ["./pyck/geo/frontend/*"]
     }
   }
 }

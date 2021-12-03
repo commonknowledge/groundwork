@@ -3,7 +3,8 @@ import { defineConfig } from "vite";
 import legacy from "@vitejs/plugin-legacy";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-import { peerDependencies } from "./package.json";
+import { peerDependencies, devDependencies } from "./package.json";
+import { resolve } from "path";
 
 export default defineConfig(({ mode }) => {
   // Bundled mode:
@@ -14,10 +15,26 @@ export default defineConfig(({ mode }) => {
   // - JS distributed via npm. Frontend widgets require this to be built.
   // - Some dependencies included in bundle.
   // - Some dependencies externalised (see package.json peerDependencies field)
+  //
+  // Test-utils mode:
+  // - JS distributed via npm. Available via `import 'groundwork-ui/test-utils'`
+  // - Some dependencies included in bundle.
+  // - Some dependencies externalised (see package.json peerDependencies field)
+  // - Some dependencies that will throw in test environments (such as mapbox) replaced with the mock we use internally
+  //   for testing.
 
   const isBundled = mode === "bundled";
   const isDev = mode === "dev";
-  const entrypoint = isBundled ? "register.ts" : "index.ts";
+  const isTestUtils = mode === "test-utils";
+  const isLibrary = !isBundled && !isDev;
+  const outDir = isBundled ? "pyck/core/static/" : `build/${mode}/`;
+
+  const alias = !isTestUtils
+    ? []
+    : TEST_MOCKS.map((moduleName) => ({
+        find: new RegExp(`^${moduleName}$`),
+        replacement: resolve(`__mocks__/${moduleName}.ts`),
+      }));
 
   return {
     base: "/static/",
@@ -32,31 +49,49 @@ export default defineConfig(({ mode }) => {
           targets: ["defaults", "not IE 11"],
         }),
     ]),
+    resolve: {
+      alias,
+    },
     build: {
       emptyOutDir: true,
+      outDir,
       rollupOptions: {
         external: isBundled ? [] : Object.keys(peerDependencies),
         output: {
-          dir: isBundled ? "pyck/core/static/" : "dist/",
+          dir: outDir,
         },
+
         input: {
-          main: `pyck/core/frontend/${entrypoint}`,
+          main: `pyck/core/frontend/${getEntrypoint(mode)}`,
         },
       },
-      lib:
-        isBundled || isDev
-          ? undefined
-          : {
-              entry: path.resolve(
-                __dirname,
-                `pyck/core/frontend/${entrypoint}`
-              ),
-              formats: isBundled ? ["cjs"] : ["es"],
-              name: "pyck",
-              fileName: () => `index.js`,
-            },
+      lib: !isLibrary
+        ? undefined
+        : {
+            entry: path.resolve(
+              __dirname,
+              `pyck/core/frontend/${getEntrypoint(mode)}`
+            ),
+            formats: isBundled ? ["cjs"] : ["es"],
+            name: "groundwork",
+            fileName: () => `index.js`,
+          },
     },
   };
 });
+
+const TEST_MOCKS = ["mapbox-gl"];
+
+/** Return the entry file for the current build configuration. */
+const getEntrypoint = (mode) => {
+  if (mode === "bundled") {
+    return "register.ts";
+  }
+  if (mode === "test-utils") {
+    return "test-utils.ts";
+  }
+
+  return "index.ts";
+};
 
 const compact = (array) => array.filter((item) => !!item);

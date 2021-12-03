@@ -1,3 +1,5 @@
+import "mapbox-gl/dist/mapbox-gl.css";
+
 import { Controller } from "@hotwired/stimulus";
 import mapbox from "mapbox-gl";
 import { getReferencedData } from "~core/util/stimulus-utils";
@@ -17,8 +19,6 @@ export default class MapController extends Controller {
     style: String,
     zoom: Number,
   };
-
-  private static cssLoaded = false;
 
   private apiKeyValue!: string;
   private styleValue!: string;
@@ -101,11 +101,6 @@ export default class MapController extends Controller {
         return resolve(undefined);
       }
 
-      if (!MapController.cssLoaded) {
-        await MAPBOX_CSS;
-        MapController.cssLoaded = true;
-      }
-
       const map = new mapbox.Map({
         accessToken: this.apiKeyValue,
         container: this.canvasTarget,
@@ -121,6 +116,3 @@ export default class MapController extends Controller {
     });
   }
 }
-
-// Load the mapbox css via dynamic import so that it isn't added to the entry css by bundlers.
-const MAPBOX_CSS = import("mapbox-gl/dist/mapbox-gl.css");

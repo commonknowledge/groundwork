@@ -1,8 +1,8 @@
-import { Controller, ControllerConstructor } from "@hotwired/stimulus";
 import {
   createTestFixture,
   getTestControllerIdentifier,
 } from "~core/util/stimulus-test-utils";
+
 import MapController from "../controllers/map-controller";
 import { MapConfigController } from "./map-utils";
 

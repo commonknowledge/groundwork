@@ -16,6 +16,7 @@
     "@types/jest": "^27.0.3",
     "@types/mapbox-gl": "^2.4.2",
     "@vitejs/plugin-legacy": "^1.6.2",
+    "events": "^3.3.0",
     "jest": "^27.3.1",
     "mapbox-gl": "^2.6.0",
     "mutationobserver-shim": "^0.3.7",
@@ -31,12 +32,15 @@
     "@hotwired/stimulus": "^3.0.1"
   },
   "files": [
-    "dist"
+    "build"
   ],
-  "module": "./dist/index.js",
+  "module": "./build/production/index.js",
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": "./build/production/index.js"
+    },
+    "./test-utils": {
+      "import": "./build/test-utils/index.js"
     }
   }
 }
