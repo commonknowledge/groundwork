@@ -53,7 +53,7 @@ formatting: codestyle
 .PHONY: python-api-docs
 python-api-docs:
 	rm -rf docs/api/*
-	python bin/gendocs.py
+	poetry run python bin/gendocs.py
 
 .PHONY: component-docs
 component-docs:
