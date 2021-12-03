@@ -148,7 +148,7 @@ class Constituency(SyncedModel):
     name = models.CharField(max_length=256)
 
     # This will be populated from the remote data.
-    current_representation = models.ForeignKey('MP',
+    current_mp = models.ForeignKey('MP',
       null=True,
       on_delete=models.SET_NULL)
 
@@ -189,7 +189,7 @@ class Party(SyncedModel):
     name = models.CharField(max_length=256)
 
     # This will be populated from the remote data.
-    foreground_colour = models.CharField(max_length=256)
+    background_colour = models.CharField(max_length=256)
 ```
 
 That's it! Generate and run migrations for the new models, run `python manage.py run_cron_tasks --once` again and you

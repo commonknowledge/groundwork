@@ -12,8 +12,8 @@ class ParliamentApiTests(TestCase):
         self.assertCanGetResourceReturnedFromList(parliament.constituencies)
 
     def test_returns_members(self):
-        self.assertListReturnsAtLeastCount(parliament.mps, 300)
-        self.assertCanGetResourceReturnedFromList(parliament.mps)
+        self.assertListReturnsAtLeastCount(parliament.members, 300)
+        self.assertCanGetResourceReturnedFromList(parliament.members)
 
     def test_returns_parties(self):
         self.assertListReturnsAtLeastCount(parliament.parties, 4)

@@ -175,7 +175,7 @@ Resource returning all current UK constituencies, along with their current repre
 """
 
 
-mps: RestDatasource[Member] = _ParliamentApiDatasource(
+members: RestDatasource[Member] = _ParliamentApiDatasource(
     path="/Members",
     resource_type=Member,
 )

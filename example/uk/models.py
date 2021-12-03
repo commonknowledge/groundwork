@@ -16,7 +16,7 @@ class Constituency(SyncedModel):
 
 
 class MP(SyncedModel):
-    sync_config = SyncConfig(datasource=parliament.mps, sync_interval=None)
+    sync_config = SyncConfig(datasource=parliament.members, sync_interval=None)
 
     external_id = models.IntegerField()
     name_display_as = models.CharField(max_length=512)
