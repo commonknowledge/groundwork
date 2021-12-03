@@ -1,6 +1,6 @@
-name: Deploy to digitalocean
+name: Test
 on:
-  push:
+  pull_request:
     branches:
       - main
 
