@@ -1,5 +1,5 @@
-import mapboxgl from "mapbox-gl";
-import { getReferencedData } from "~core/util/stimulus-utils";
+import type { Map, AnyLayer } from "mapbox-gl";
+import { getReferencedData } from "../../core/util/stimulus-utils";
 import { MapConfigController } from "../utils/map-utils";
 
 export default class MapLayerController extends MapConfigController {
@@ -9,7 +9,7 @@ export default class MapLayerController extends MapConfigController {
 
   layerValue!: string;
 
-  connectMap(map: mapboxgl.Map) {
+  connectMap(map: Map) {
     const layer = this.layer;
 
     if (layer && !map.getLayer(layer.id)) {
@@ -17,7 +17,7 @@ export default class MapLayerController extends MapConfigController {
     }
   }
 
-  disconnectMap(map: mapboxgl.Map) {
+  disconnectMap(map: Map) {
     const layer = this.layer;
 
     if (layer) {
@@ -26,6 +26,6 @@ export default class MapLayerController extends MapConfigController {
   }
 
   get layer() {
-    return getReferencedData<mapboxgl.AnyLayer>(this.layerValue);
+    return getReferencedData<AnyLayer>(this.layerValue);
   }
 }

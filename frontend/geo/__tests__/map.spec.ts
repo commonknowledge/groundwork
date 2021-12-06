@@ -1,7 +1,6 @@
-import mapboxgl from "mapbox-gl";
-import { createTestFixture } from "~core/util/stimulus-test-utils";
+import { createTestFixture } from "../../core/test-utils";
 import MapController from "../controllers/map-controller";
-import { MapConfigController } from "../utils/map-utils";
+import { MapConfigController } from "../";
 
 test("initializes mapbox and binds to canvas", async () => {
   const fixture = await createTestFixture({

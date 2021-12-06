@@ -120,7 +120,10 @@ set-release-version:
 build-js:
 	yarn vite build --mode bundled
 	yarn vite build --mode test-utils
-	yarn vite build
+	yarn vite build --mode lib
+	rm -rf build/ts
+	yarn tsc
+	node bin/api-extractor.js
 
 .PHONY: build-python
 build-python: set-release-version build-js

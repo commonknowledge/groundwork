@@ -1,7 +1,7 @@
 import {
   createTestFixture,
   getTestControllerIdentifier,
-} from "~core/util/stimulus-test-utils";
+} from "../../core/test-utils";
 
 import MapController from "../controllers/map-controller";
 import { MapConfigController } from "./map-utils";

@@ -1,1 +1,1 @@
-import "~core/register";
+import "../../frontend/index.bundled";

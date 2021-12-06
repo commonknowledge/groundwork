@@ -1,8 +1,8 @@
 import "mapbox-gl/dist/mapbox-gl.css";
 
 import { Controller } from "@hotwired/stimulus";
-import mapbox from "mapbox-gl";
-import { getReferencedData } from "~core/util/stimulus-utils";
+import * as mapbox from "mapbox-gl";
+import { getReferencedData } from "../../core/util/stimulus-utils";
 
 /**
  * @internal

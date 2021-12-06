@@ -11,7 +11,7 @@ import StimulusControllerResolver from "stimulus-controller-resolver";
  * - Registering async loaders for Stimulus controller modules
  * - Adding in loaders for all the controllers in this package.
  **/
-export default function startApp(...modules: AsyncModuleMap[]) {
+export function startApp(...modules: AsyncModuleMap[]) {
   const app = Application.start();
   const allModules: AsyncModuleMap = Object.assign(
     {},
@@ -63,7 +63,7 @@ const createAsyncControllerResolver = (pathMap: AsyncModuleMap) => {
  * Compiled-in references to all controllers in this package
  * See: https://vitejs.dev/guide/features.html#glob-import
  */
-const EXPORTED_MODULES = import.meta.glob("../../**/*-controller.ts");
+const EXPORTED_MODULES = import.meta.glob("../**/*-controller.ts");
 
 /**
  * Given a path to a controller following the Stimulus file naming convention,

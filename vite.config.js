@@ -1,7 +1,6 @@
 import * as path from "path";
 import { defineConfig } from "vite";
 import legacy from "@vitejs/plugin-legacy";
-import tsconfigPaths from "vite-tsconfig-paths";
 
 import { peerDependencies, devDependencies } from "./package.json";
 import { resolve } from "path";
@@ -25,9 +24,14 @@ export default defineConfig(({ mode }) => {
 
   const isBundled = mode === "bundled";
   const isDev = mode === "dev";
+
   const isTestUtils = mode === "test-utils";
   const isLibrary = !isBundled && !isDev;
+
+  const entrypoint = `frontend/index.${mode}.ts`;
   const outDir = isBundled ? "pyck/core/static/" : `build/${mode}/`;
+
+  console.log({ isBundled, isDev, isLibrary, outDir, entrypoint });
 
   const alias = !isTestUtils
     ? []
@@ -39,10 +43,9 @@ export default defineConfig(({ mode }) => {
   return {
     base: "/static/",
     optimizeDeps: {
-      entries: ["./pyck/core/frontend/index.ts"],
+      entries: [entrypoint],
     },
     plugins: compact([
-      tsconfigPaths(),
       isBundled &&
         legacy({
           polyfills: false,
@@ -53,6 +56,7 @@ export default defineConfig(({ mode }) => {
       alias,
     },
     build: {
+      manifest: isBundled,
       emptyOutDir: true,
       outDir,
       rollupOptions: {
@@ -62,16 +66,13 @@ export default defineConfig(({ mode }) => {
         },
 
         input: {
-          main: `pyck/core/frontend/${getEntrypoint(mode)}`,
+          main: entrypoint,
         },
       },
       lib: !isLibrary
         ? undefined
         : {
-            entry: path.resolve(
-              __dirname,
-              `pyck/core/frontend/${getEntrypoint(mode)}`
-            ),
+            entry: path.resolve(__dirname, entrypoint),
             formats: isBundled ? ["cjs"] : ["es"],
             name: "groundwork",
             fileName: () => `index.js`,
@@ -84,13 +85,6 @@ const TEST_MOCKS = ["mapbox-gl"];
 
 /** Return the entry file for the current build configuration. */
 const getEntrypoint = (mode) => {
-  if (mode === "bundled") {
-    return "register.ts";
-  }
-  if (mode === "test-utils") {
-    return "test-utils.ts";
-  }
-
   return "index.ts";
 };
 

@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
-import mapboxgl from "mapbox-gl";
-import { resolveablePromise } from "~core/util/promise-utils";
+import type { Map } from "mapbox-gl";
+import { resolveablePromise } from "../../core/util/promise-utils";
 
 /**
  * Base class for a map config controller.
@@ -9,7 +9,7 @@ import { resolveablePromise } from "~core/util/promise-utils";
  * the mapbox instance with controls, data sources, custom layers, etc.
  */
 export class MapConfigController<T = void> extends Controller {
-  map?: mapboxgl.Map;
+  map?: Map;
   ready = resolveablePromise();
 
   initialize() {
@@ -24,8 +24,8 @@ export class MapConfigController<T = void> extends Controller {
     }
   }
 
-  connectMap(map: mapboxgl.Map): void | Promise<void> {}
-  disconnectMap(map: mapboxgl.Map): void | Promise<void> {}
+  connectMap(map: Map): void | Promise<void> {}
+  disconnectMap(map: Map): void | Promise<void> {}
 
   private handleMapReady = async (event: any) => {
     const map = event.detail.map;
