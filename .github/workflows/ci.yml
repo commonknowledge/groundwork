@@ -1,20 +1,35 @@
-name: merge-to-main
+name: ci
 on:
   push:
     branches:
       - main
 jobs:
-  write-docs:
+  deploy-docs:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/commonknowledge/do-app-baseimage-django-node:364385f9d196a2bbe2d5faea025520cc0316501f
+      # Workaround for: https://github.com/actions/checkout/issues/211
+      options: --user 1001
+      volumes:
+        - "/home/runner/docker/.cache:/home/app/.cache"
+      env:
+        DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
+        DEBUG: True
+        PY_IGNORE_IMPORTMISMATCH: 1
+    services:
+      db:
+        image: kartoza/postgis:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DBNAME: postgres
+          POSTGRES_HOSTNAME: postgres
+          POSTGRES_PORT: 5432
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - uses: Gr1N/setup-poetry@v7
       - uses: actions/cache@v2
         with:
-          path: ~/.cache/pypoetry/virtualenvs
-          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
-      - run: make bootstrap
+          path: /home/runner/docker/.cache/poetry
+          key: do-app-baseimage-django-node:364385f9d196a2bbe2d5faea025520cc0316501f-poetry-${{ hashFiles('poetry.lock') }}
+      - run: make install
       - run: make deploy-docs
