@@ -2,7 +2,7 @@ from time import sleep
 
 from django.core.management.base import BaseCommand, CommandParser
 
-from pyck.core.cron import run_pending_cron_tasks
+from groundwork.core.cron import run_pending_cron_tasks
 
 
 class Command(BaseCommand):

@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 
 
 class MapExampleView(TemplateView):
-    template_name = "pyck/geo/examples/map_example.html"
+    template_name = "groundwork/geo/examples/map_example.html"
 
     @property
     def sources(self):

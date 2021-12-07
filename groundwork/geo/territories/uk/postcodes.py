@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from django.contrib.gis.geos import Point
 
-from pyck.core.datasources import RestDatasource
+from groundwork.core.datasources import RestDatasource
 
 
 @dataclass

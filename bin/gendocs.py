@@ -27,7 +27,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 django.setup()
 
 
-modules = [app for app in settings.INSTALLED_APPS if app.startswith("pyck.")]
+modules = [app for app in settings.INSTALLED_APPS if app.startswith("groundwork.")]
 context = pdoc.Context()
 
 modules = [pdoc.Module(mod, context=context) for mod in modules]

@@ -59,7 +59,7 @@ python-api-docs:
 component-docs:
 	rm -rf docs/components
 	mkdir -p docs/components
-	cp pyck/**/docs/*.components.md docs/components/
+	cp groundwork/**/docs/*.components.md docs/components/
 
 .PHONY: api-docs
 api-docs: python-api-docs component-docs
@@ -88,7 +88,7 @@ test:
 check-codestyle:
 	poetry run isort --diff --check-only --settings-path pyproject.toml ./
 	poetry run black --diff --check --config pyproject.toml ./
-	poetry run darglint --docstring-style google --verbosity 2 pyck
+	poetry run darglint --docstring-style google --verbosity 2 groundwork
 	yarn tsc --noemit
 	yarn prettier --check .
 
@@ -96,13 +96,13 @@ check-codestyle:
 check-safety:
 	poetry check
 	poetry run safety check --full-report
-	poetry run bandit -ll --recursive pyck tests
+	poetry run bandit -ll --recursive groundwork tests
 
 .PHONY: lint
 lint: check-codestyle check-safety test
 
 .PHONY: ci
-ci: lint
+ci: lint build-docs build-js build-python
 	poetry run pytest
 	yarn test
 
@@ -126,8 +126,8 @@ build-js:
 	node bin/api-extractor.js
 
 .PHONY: build-python
-build-python: set-release-version build-js
-	echo poetry build
+build-python: build-js
+	poetry build
 
 .PHONY: release
 release: clean-all set-release-version build-js build-python
@@ -144,7 +144,7 @@ pycache-remove:
 
 .PHONY: build-remove
 build-remove:
-	rm -rf build/ pyck/core/static/ docs/api/ docs/components/ temp/
+	rm -rf build/ groundwork/core/static/ docs/api/ docs/components/ temp/
 
 .PHONY: clean-all
 clean-all: pycache-remove build-remove

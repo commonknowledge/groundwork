@@ -2,7 +2,7 @@ from typing import TypeVar
 
 from dataclasses import dataclass
 
-from pyck.core.datasources import RestDatasource
+from groundwork.core.datasources import RestDatasource
 
 
 class OnsCodeType:

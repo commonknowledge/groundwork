@@ -2,7 +2,7 @@ from test.tags import integration_test
 
 from django.test import TestCase
 
-from pyck.geo.territories.uk import parliament
+from groundwork.geo.territories.uk import parliament
 
 
 @integration_test

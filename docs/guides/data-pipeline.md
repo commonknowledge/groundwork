@@ -26,7 +26,7 @@ A datasource is a simple interface that defines:
 - A type that returned objects should be assumed to be instances of.
 - A field on that type that provides the object's ID.
 
-You can check out the documentation for the [Datasource](../../api/pyck.core.datasources/#externalresource) class
+You can check out the documentation for the [Datasource](../../api/groundwork.core.datasources/#externalresource) class
 for more detail on this. For now, we'll look at one thing we can do with them – regularly synchronising data from a
 remote service.
 
@@ -46,20 +46,20 @@ We'll configure it to update periodically so that changes to UK constituencies a
 
 ### Create your model
 
-First, we'll create our model. To make this easier, we'll make the field names in our model match the field names in the datasource. The datasources provided with Groundwork are all documented and have type hints on the objects they return. The UK Parliament datasource is documented [here](../../api/pyck.geo.territories.uk.parliament/).
+First, we'll create our model. To make this easier, we'll make the field names in our model match the field names in the datasource. The datasources provided with Groundwork are all documented and have type hints on the objects they return. The UK Parliament datasource is documented [here](../../api/groundwork.geo.territories.uk.parliament/).
 
 Some things to note:
 
-- We're subclassing [SyncedModel](../../api/pyck.core.datasources/#syncedmodel). This is needed to register the model with the sync manager.
-- We configure where to fetch the data from, how often, and how to map it onto our local model using [SyncConfig](../../api/pyck.core.datasources/#syncconfig).
+- We're subclassing [SyncedModel](../../api/groundwork.core.datasources/#syncedmodel). This is needed to register the model with the sync manager.
+- We configure where to fetch the data from, how often, and how to map it onto our local model using [SyncConfig](../../api/groundwork.core.datasources/#syncconfig).
 - We need to store the id used by the remote data source. By default, this is called `external_id`, but you can customize this.
 - We need to add the fields we want to save data from in our model. It's absolutely fine to leave out fields that you
   don't want to save.
 
 ```python title="app/models.py"
 from django.db import models
-from pyck.core.datasources import SyncedModel, SyncConfig
-from pyck.geo.territories.uk import parliament
+from groundwork.core.datasources import SyncedModel, SyncConfig
+from groundwork.geo.territories.uk import parliament
 
 class Constituency(SyncedModel):
     # This is where we specify the datasource, along with other options
@@ -134,8 +134,8 @@ Let's expand our example to include data about the current MP for the constituen
 
 ```python title="app/models.py"
 from django.db import models
-from pyck.core.datasources import SyncedModel, SyncConfig
-from pyck.geo.territories.uk import parliament
+from groundwork.core.datasources import SyncedModel, SyncConfig
+from groundwork.geo.territories.uk import parliament
 
 class Constituency(SyncedModel):
     # This is where we specify the datasource, along with other options
@@ -205,8 +205,8 @@ other services specific to your organisation.
 
 ## Provided datasources
 
-- [UK Parliament Members & Constituencies](../../api/pyck.geo.territories.uk.parliament/)
-- [UK Postcode Geocoding](../../api/pyck.geo.territories.uk.postcodes/)
+- [UK Parliament Members & Constituencies](../../api/groundwork.geo.territories.uk.parliament/)
+- [UK Postcode Geocoding](../../api/groundwork.geo.territories.uk.postcodes/)
 
 Forthcoming:
 
@@ -223,7 +223,7 @@ Forthcoming:
 Many services provide their own Python client library. If the one you're building a datasource for does, it's better to
 simply adapt it in the Datasource interface than reinvent the wheel.
 
-To do this, extend [Datasource](../../api/pyck.core.datasources/#externalresource). You need to implement `get()`
+To do this, extend [Datasource](../../api/groundwork.core.datasources/#externalresource). You need to implement `get()`
 which should get a resource by id and `list()`, which should list resources, optionally filtering them.
 
 Let's do that for a client library for an imaginary service classed _ZapMessage_.
@@ -236,7 +236,7 @@ from typing import TypeVar, Iterable, Any
 
 import zapmessage
 from django.conf import settings
-from pyck.core.datasources import Datasource
+from groundwork.core.datasources import Datasource
 
 # We're using type hints in this example, but feel free to ignore them if
 # they're unfamiliar.
@@ -306,7 +306,7 @@ from datetime import datetime
 from typing import TypeVar, Iterable, Any, Dict
 
 from django.conf import settings
-from pyck.core.datasources import RestDatasource
+from groundwork.core.datasources import RestDatasource
 
 @dataclass
 class Message:
@@ -382,4 +382,4 @@ class ZapMessageResource(RestDatasource[ResourceT]):
 ```
 
 You can see the full set of options and override points in
-[RestClient](../../api/pyck.core.datasources/#restclient)'s API documentation.
+[RestClient](../../api/groundwork.core.datasources/#restclient)'s API documentation.

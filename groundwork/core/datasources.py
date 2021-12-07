@@ -22,7 +22,7 @@ from django.db import models
 from rest_framework import parsers, serializers
 from rest_framework_dataclasses.serializers import DataclassSerializer
 
-from pyck.core.cron import register_cron
+from groundwork.core.cron import register_cron
 
 ResourceT = TypeVar("ResourceT")
 
@@ -359,6 +359,6 @@ class SyncedModel(models.Model):
         """
         Synchronizes the class immediately.
         """
-        from pyck.core.internal.sync_manager import SyncManager
+        from groundwork.core.internal.sync_manager import SyncManager
 
         SyncManager().sync_model(cls)

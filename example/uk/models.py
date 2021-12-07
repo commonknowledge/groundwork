@@ -1,7 +1,7 @@
 from django.db import models
 
-from pyck.core.datasources import SyncConfig, SyncedModel
-from pyck.geo.territories.uk import parliament
+from groundwork.core.datasources import SyncConfig, SyncedModel
+from groundwork.geo.territories.uk import parliament
 
 
 class Constituency(SyncedModel):

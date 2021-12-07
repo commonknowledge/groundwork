@@ -5,7 +5,7 @@ from inspect import getfullargspec, unwrap
 
 from django.template.library import Library, SimpleNode, parse_bits
 
-from pyck.core.types import Decorator
+from groundwork.core.types import Decorator
 
 
 def register_block_tag(

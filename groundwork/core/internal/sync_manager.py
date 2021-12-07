@@ -9,8 +9,8 @@ from datetime import datetime
 from django.db import models, transaction
 from django.utils import timezone
 
-from pyck.core.datasources import SyncedModel
-from pyck.core.internal.collection_util import compact_values
+from groundwork.core.datasources import SyncedModel
+from groundwork.core.internal.collection_util import compact_values
 
 
 @dataclass

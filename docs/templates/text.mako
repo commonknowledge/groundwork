@@ -45,7 +45,7 @@ ${to_markdown_fixed(s, module=m)}
 
 
     s, _ = re.subn(
-        r'pyck\.[^ \[\]]+',
+        r'groundwork\.[^ \[\]]+',
         make_link,
         s,
     )
@@ -58,7 +58,7 @@ ${to_markdown_fixed(s, module=m)}
     return [
         ref for ref
         in refs
-        if ref.refname.startswith('pyck.')
+        if ref.refname.startswith('groundwork.')
         and not ref.refname.split('.')[-1].startswith('_')
     ]
 %>

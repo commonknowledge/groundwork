@@ -30,7 +30,9 @@ export default defineConfig(({ mode }) => {
   const isLibrary = !isBundled && !isDev;
 
   const entrypoint = `frontend/index.${mode}.ts`;
-  const outDir = isBundled ? "pyck/core/static/groundwork/" : `build/${mode}/`;
+  const outDir = isBundled
+    ? "groundwork/core/static/groundwork/"
+    : `build/${mode}/`;
 
   const alias = !isTestUtils
     ? []

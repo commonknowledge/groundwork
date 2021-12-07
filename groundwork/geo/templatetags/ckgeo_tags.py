@@ -8,12 +8,12 @@ from django.template.base import token_kwargs
 from django.template.library import Library, parse_bits
 from django.template.loader import get_template
 
-from pyck.core.template import register_block_tag
+from groundwork.core.template import register_block_tag
 
 register = Library()
 
 
-MAP_TEMPLATE = get_template("pyck/geo/components/map.html")
+MAP_TEMPLATE = get_template("groundwork/geo/components/map.html")
 
 
 @register_block_tag(library=register, takes_context=True)
@@ -48,7 +48,7 @@ def map(
     )
 
 
-@register.inclusion_tag("pyck/geo/components/map_config.html")
+@register.inclusion_tag("groundwork/geo/components/map_config.html")
 def map_source(id, data):
     ref = "map_source_config"
 
@@ -59,7 +59,7 @@ def map_source(id, data):
     }
 
 
-@register.inclusion_tag("pyck/geo/components/map_config.html")
+@register.inclusion_tag("groundwork/geo/components/map_config.html")
 def map_layer(layer):
     ref = "map_layer_config"
 

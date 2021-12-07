@@ -3,7 +3,7 @@ from typing import Any, Callable, TypeVar
 from django.core.cache import cache
 from django.db.models import QuerySet
 
-from pyck.core.types import Decorator
+from groundwork.core.types import Decorator
 
 
 def django_cached(prefix: str, get_key: Any = None, ttl: int = 500) -> Decorator:
