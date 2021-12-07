@@ -90,7 +90,7 @@ class RestDatasource(Datasource[ResourceT]):
     Responses are validated using a django-rest Serializer to ensure that the returned data matches the types declared
     on the resource type.
 
-    You are encouraged to use python's inbuilt [`@dataclass`](https://docs.python.org/3/library/dataclasses.html)
+    You are encouraged to use Python's inbuilt [`@dataclass`](https://docs.python.org/3/library/dataclasses.html)
     decorator and define type hints when defining these classes as this allows type-safe serializers to be
     auto-generated and decreases the amount of boilerplate code that you need to write.
 

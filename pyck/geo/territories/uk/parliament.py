@@ -107,7 +107,7 @@ class _ParliamentApiDatasource(RestDatasource[ResourceT]):
         return super().deserialize(self.flatten_resource(data))
 
     def paginate(self, **kwargs):
-        # We use the search api for 'list' operations. A search query  must be provided, otherwise no results are
+        # We use the search API for 'list' operations. A search query  must be provided, otherwise no results are
         # returned
         kwargs.setdefault("searchText", "")
         url = self.url + self.list_suffix
@@ -140,7 +140,7 @@ class _ParliamentSmallListApiDatasource(_ParliamentApiDatasource[ResourceT]):
 
 class _ParliamentConstituenciesDatasource(_ParliamentApiDatasource[Constituency]):
     """
-    Augments the constituency api response with the ONS code for the constituency, as this is not provided by the
+    Augments the constituency API response with the ONS code for the constituency, as this is not provided by the
     parliament API by default and is widely required for matching to geographical locations.
     """
 

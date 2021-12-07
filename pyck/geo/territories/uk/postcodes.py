@@ -83,7 +83,7 @@ postcode: RestDatasource[GeolocatedPostcode] = _PostcodesApiDatasource(
     resource_type=GeolocatedPostcode,
 )
 """
-Geolocated postcode api resource.
+Geolocated postcode API resource.
 
 Only GET requests are supported.
 

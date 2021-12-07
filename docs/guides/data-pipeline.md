@@ -4,9 +4,9 @@ useful for several reasons, but mainly:
 - Consistent conventions mean less surprises about how different things work.
 - The standardised model/queryset format allows the framework to support generic views, forms and other components.
 
-Unfortunately, they don't help so much with external data - either public data that we want to be infomred of changes to or data managed by external services.
+Unfortunately, they don't help so much with external data - either public data that we want to be informed of changes to or data managed by external services.
 
-This gets particuarly tricky when we want to augment the remote data with our own data or there are api limits that
+This gets particuarly tricky when we want to augment the remote data with our own data or there are API limits that
 require us to store the data locally and keep it up to date – we often end up writing lots of bug-prone glue code to
 manage this.
 
@@ -216,7 +216,7 @@ Forthcoming:
 
 ### Adapting an existing client library
 
-Many services provide their own python client library. If the one you're building a datasource for does, it's better to
+Many services provide their own Python client library. If the one you're building a datasource for does, it's better to
 simply adapt it in the Datasource interface than reinvent the wheel.
 
 To do this, extend [Datasource](../../api/pyck.core.datasources/#externalresource). You need to implement `get()`

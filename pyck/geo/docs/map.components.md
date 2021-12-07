@@ -23,7 +23,7 @@ Renders a Map onto the page.
     :   Optional. Override the map style on a per-map basis. Defaults to the `MAPBOX_DEFAULT_STYLE` django config.
 
     __`api_key`__
-    :   Optional. Override the map api key on a per-map basis. Defaults to the `MAPBOX_PUBLIC_API_KEY` django config.
+    :   Optional. Override the map API key on a per-map basis. Defaults to the `MAPBOX_PUBLIC_API_KEY` django config.
 
     __`center`__
     :   Optional. Initial [lon,lat] location to center the map on.
@@ -51,7 +51,7 @@ Renders a Map onto the page.
     __Values__
 
     __`api-key`__
-    : A valid mapbox public api key
+    : A valid mapbox public API key
 
     __`center`__
     : JSON array representing a [lon,lat] pair to initially center the map on.
