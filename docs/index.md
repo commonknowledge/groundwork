@@ -1,11 +1,10 @@
 ---
+template: home.html
 hide:
   - navigation
   - toc
 ---
 
-![Logo](./logo.png)
+# Groundwork
 
-# Pycommonknowledge
-
-An integrated and opinionated collection of Django applications and Javascript components addressing needs for people building software for organisers and campaigners.
+An integrated Django and Javascript framework for rapidly building tools.

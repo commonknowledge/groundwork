@@ -5,7 +5,7 @@
   "name": "Python 3 & PostgreSQL",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
-  "workspaceFolder": "/workspace/pycommonknowledge",
+  "workspaceFolder": "/workspace/groundwork",
   "forwardPorts": [8000],
   // Set *default* container specific settings.json values on container create.
   "settings": {

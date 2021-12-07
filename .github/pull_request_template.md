@@ -1,5 +1,5 @@
 <!--- Provide a general summary of your changes in the Title above -->
-<!--- Please also read our [contributor guidelines](https://commonknowledge.github.io/pycommonknowledge/contributing) -->
+<!--- Please also read our [contributor guidelines](https://groundwork.commonknowledge.coop/contributing) -->
 
 ## Description
 

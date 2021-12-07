@@ -4,14 +4,14 @@ requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "pycommonknowledge"
+name = "groundwork-django"
 version = "0.1.0"
-description = "An integrated and opinionated collection of Django applications and Javascript components addressing needs for people building software for organisers and campaigners."
+description = "An integrated Django and Javascript framework for people who build tools for organisers."
 readme = "README.md"
 authors = ["Common Knowledge <hello@commonknowledge.coop>"]
 license = "GNU GPL v3.0"
-repository = "https://github.com/commonknowledge/pycommonknowledge"
-homepage = "https://github.com/commonknowledge/pycommonknowledge"
+repository = "https://github.com/commonknowledge/groundwork"
+homepage = "https://groundwork.commonknowledge.coop/"
 
 # Keywords description https://python-poetry.org/docs/pyproject/#keywords
 keywords = []  #! Update me
