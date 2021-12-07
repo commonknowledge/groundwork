@@ -1,20 +1,25 @@
-site_name: PyCommonknowledge
-site_url: https://commonknowledge.github.io/pycommonknowledge/
-repo_url: https://github.com/commonknowledge/pycommonknowledge/
+site_name: Groundwork
+site_url: https://groundwork.commonknowledge.coop/
+repo_url: https://github.com/commonknowledge/groundwork/
 nav:
-  - index.md
+  - Home: index.md
   - Reference:
       - Core:
-        - Cache Utils: api/pyck.core.cache.md
-        - Template Utils: api/pyck.core.template.md
+          - Cache Utils: api/pyck.core.cache.md
+          - Template Utils: api/pyck.core.template.md
       - Geo:
-        - Map Components: components/map.components.md
+          - Map Components: components/map.components.md
   - Contributing:
       - Contribution Guidelines: contributing.md
       - Developer Setup: developing.md
       - Code Style: code-style.md
 theme:
   name: material
+  logo: img/logo.jpg
+  favicon: img/logo.jpg
+  custom_dir: docs/overrides
+  font:
+    text: IBM Plex Sans
   features:
     - navigation.instant
     - navigation.tabs
@@ -22,9 +27,15 @@ theme:
     - navigation.indexes
 markdown_extensions:
   - pymdownx.tabbed:
-      alternate_style: true 
+      alternate_style: true
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.superfences
   - pymdownx.snippets
   - def_list
+extra_css:
+  - stylesheets/extra.css
+extra:
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/commonknowledge
