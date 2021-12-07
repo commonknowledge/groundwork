@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mp-4">
+  <div class="row g-4">
+    <h1 class="fw-300 col-12">UK MPs</h1>
+  </div>
+
+  <div class="row g-4">
+    {% for constituency in object_list %}
+      <div class="col-3">
+        <section style="color: #{{constituency.current_mp.latest_party.foreground_colour}}; background-color: #{{constituency.current_mp.latest_party.background_colour}};" class="card" >
+          <img src="{{ constituency.current_mp.thumbnail_url }}" class="card-img-top">
+    
+          <div class="card-body">
+            <h5 class="card-title">{{constituency.name}}</h5>
+              {% if constituency.current_mp %}
+              <dl>
+                <dt>Current MP</dt>
+                <dd>{{constituency.current_mp.name_display_as|default:"Independent"}}</dd>
+              </dl>
+              <dl>
+                <dt>Party</dt>
+                <dd>{{constituency.current_mp.latest_party.name|default:"Independent"}}</dd>
+              </dl>
+              {% else %}
+                <em>Seat currently vacant</em>
+              {% endif %}
+            </div>
+        </section>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -19,7 +19,6 @@ poetry-remove:
 .PHONY: install
 install:
 	poetry install -n
-	poetry run mypy --install-types --non-interactive ./
 	yarn
 
 .PHONY: pre-commit-install
@@ -82,7 +81,7 @@ deploy-docs: api-docs
 
 .PHONY: test
 test:
-	poetry run python manage.py test test/*
+	poetry run pytest -vs -m "not integration_test"
 	yarn test
 
 .PHONY: check-codestyle
@@ -93,10 +92,6 @@ check-codestyle:
 	yarn tsc --noemit
 	yarn prettier --check .
 
-.PHONY: mypy
-mypy:
-	poetry run mypy .
-
 .PHONY: check-safety
 check-safety:
 	poetry check
@@ -104,7 +99,12 @@ check-safety:
 	poetry run bandit -ll --recursive pyck tests
 
 .PHONY: lint
-lint: test check-codestyle mypy check-safety
+lint: check-codestyle check-safety test
+
+.PHONY: ci
+ci: lint
+	poetry run pytest
+	yarn test
 
 
 #* Assets
@@ -123,7 +123,7 @@ pycache-remove:
 
 .PHONY: build-remove
 build-remove:
-	rm -rf build/
+	rm -rf build/ dist/ docs/api/ docs/components/ temp/
 
 .PHONY: clean-all
-clean-all: pycache-remove build-remove docker-remove
+clean-all: pycache-remove build-remove

@@ -40,9 +40,10 @@ def recursive_htmls(mod):
         yield from recursive_htmls(submod)
 
 
-for mod in modules:
-    for module_name, html in recursive_htmls(mod):
-        docs_path = OUTPUT_DIR / f"{module_name}.md"
+if __name__ == "__main__":
+    for mod in modules:
+        for module_name, html in recursive_htmls(mod):
+            docs_path = OUTPUT_DIR / f"{module_name}.md"
 
-        with open(str(docs_path), "w", encoding="utf8") as f:
-            f.write(html)
+            with open(str(docs_path), "w", encoding="utf8") as f:
+                f.write(html)

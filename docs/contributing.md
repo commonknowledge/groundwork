@@ -10,7 +10,7 @@ We don't want to have an excessively prescriptive sense of what is 'in' and 'out
 2. Remove any dependencies from application code outside the `commonknowledge` package. Start to think about how it can be tested in isolation (if it isn't already).
 3. Open a feature request against this repository. Describe the new feature, include links to your implementation other repositories. If the application is publicly accessible, include links to it in the live app.
 4. Discuss and refine the API with other contributors.
-5. When the feature request is accepted, fork this repository (or create a feature branch if you have write access) and commit the feature implementation. Ensure that you have good test coverage of both python and javascript components and all public API methods are documented.
+5. When the feature request is accepted, fork this repository (or create a feature branch if you have write access) and commit the feature implementation. Ensure that you have good test coverage of both Python and Javascript components and all public API methods are documented.
 
 ## Bugs & backward-compatible API changes
 

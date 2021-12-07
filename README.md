@@ -1,8 +1,6 @@
 # Pycommonknowledge
 
-![Logo](./logo.png)
-
-An integrated and opinionated collection of Django applications and javascript components addressing needs for people building software for organisers and campaigners.
+An integrated Django and Javascript framework for people who build tools for organisers.
 
 For more information, check out [the documentation site](https://groundwork.commonknowledge.coop/).
 

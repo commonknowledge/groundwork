@@ -4,3 +4,5 @@ static
 node_modules
 .*_cache
 *.html
+docs/api
+docs/components
