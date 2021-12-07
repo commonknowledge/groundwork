@@ -35,13 +35,13 @@
     "@testing-library/dom": "^8.11.1"
   },
   "files": [
-    "build/production",
+    "build/lib",
     "build/test-utils"
   ],
-  "module": "./build/production/index.js",
+  "module": "./build/lib/index.js",
   "exports": {
     ".": {
-      "import": "./build/production/index.js"
+      "import": "./build/lib/index.js"
     },
     "./test-utils": {
       "import": "./build/test-utils/index.js"

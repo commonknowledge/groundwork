@@ -30,7 +30,7 @@ migrate:
 	poetry run python manage.py migrate
 
 .PHONY: bootstrap
-bootstrap: install pre-commit-install migrate
+bootstrap: poetry-download install pre-commit-install migrate
 	touch local.py
 
 
@@ -111,10 +111,8 @@ ci: lint build-docs build-js build-python
 
 .PHONY: set-release-version
 set-release-version:
-	release_version=$$(poetry run python bin/get_release_version.py)
-
-	yarn version --new-version $$release_version
-	poetry version $$release_version
+	yarn version --new-version $$(poetry run python bin/get_release_version.py)
+	poetry version $$(poetry run python bin/get_release_version.py)
 
 .PHONY: build-js
 build-js:
@@ -127,11 +125,19 @@ build-js:
 
 .PHONY: build-python
 build-python: build-js
+	rm -rf groundwork/core/static
+	cp -r build/bundled groundwork/core/static
 	poetry build
+	rm -rf groundwork/core/static
+
+.PHONY: prepare-release
+prepare-release: clean-all set-release-version build-js build-python
 
 .PHONY: release
-release: clean-all set-release-version build-js build-python
-	yarn publish
+release:
+	echo //registry.npmjs.org/:_authToken=$$NPM_TOKEN > ~/.npmrc
+	npm publish
+	poetry config pypi-token.pypi $$PYPI_TOKEN
 	poetry publish
 
 

@@ -33,4 +33,8 @@ jobs:
       - run: make install
       - run: .github/bin/wait-for-it.sh db:5432
       - run: make lint
+      - run: make prepare-release
       - run: make release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}

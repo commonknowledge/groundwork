@@ -15,6 +15,7 @@ homepage = "https://groundwork.commonknowledge.coop/"
 packages = [
     { include = "groundwork" }
 ]
+exclude = []
 
 # Keywords description https://python-poetry.org/docs/pyproject/#keywords
 keywords = []  #! Update me
