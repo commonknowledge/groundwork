@@ -6,12 +6,16 @@ useful for several reasons, but mainly:
 
 Unfortunately, they don't help so much with external data - either public data that we want to be informed of changes to or data managed by external services.
 
-This gets particuarly tricky when we want to augment the remote data with our own data or there are API limits that
-require us to store the data locally and keep it up to date – we often end up writing lots of bug-prone glue code to
-manage this.
+This gets particuarly tricky when we want to augment the remote data with our own data or there are API limits that require us to store the data locally and keep it up to date. We often end up writing lots of bug-prone glue code to manage this.
 
 Groundwork helps here by introducing a lightweight abstraction called a `Datasource`. It might be helpful to
 think of these as similar to Django' models and querysets, but for external APIs.
+
+In the examples that follow, we use a very common use-case for building out applications that help people organise. There is a campaign that needs to carve up people by the UK parliamentary constitutency they are in and add other information the campaign is concerned about that relate to it. The amount of people who support an action. The number of letter sent in this constituency to lobby an MP. There might be a model to represent this letter, for example.
+
+So we need to represent the constituencies and information about them against a source of truth, but augment this with things that we want to know about. But loading in all constituencies, or looking up this data on the fly, is slow or error prone. The data around constituencies also changes very infrequently.
+
+Datasources tries to solve for this situation which we have observed a fair amount in our own work and provide a lightweight API for doing so.
 
 ## About datasources
 
