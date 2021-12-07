@@ -1364,6 +1364,11 @@ encodeurl@~1.0.2:
   resolved "https://registry.yarnpkg.com/encodeurl/-/encodeurl-1.0.2.tgz#ad3ff4c86ec2d029322f5a02c3a9a606c95b3f59"
   integrity sha1-rT/0yG7C0CkyL1oCw6mmBslbP1k=
 
+es-module-lexer@^0.9.3:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/es-module-lexer/-/es-module-lexer-0.9.3.tgz#6f13db00cc38417137daf74366f535c8eb438f19"
+  integrity sha512-1HQ2M2sPtxwnvOvT1ZClHyQDiggdNjURWpY2we6aMKCQiUVxTmVs2UYPLIrD84sS+kMdUwfBSylbJPwNnBrnHQ==
+
 esbuild-android-arm64@0.13.14:
   version "0.13.14"
   resolved "https://registry.yarnpkg.com/esbuild-android-arm64/-/esbuild-android-arm64-0.13.14.tgz#c85083ece26be3d67e6c720e088968a98409e023"
@@ -3423,6 +3428,11 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
+
+vite-plugin-dynamic-publicpath@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/vite-plugin-dynamic-publicpath/-/vite-plugin-dynamic-publicpath-1.1.0.tgz#68473a46a64e36db03be871068a247de746e1f02"
+  integrity sha512-MSWpaESnISjVpykKWiq4qwf/dIwZhr22c1rcwMYBFrVgXVHLj8nLVodWb/tpanfdQWjSy6kYeCyQSKPjsnIyIg==
 
 vite@^2.6.14:
   version "2.6.14"

@@ -118,9 +118,9 @@ set-release-version:
 
 .PHONY: build-js
 build-js:
+	yarn vite build --mode lib
 	yarn vite build --mode bundled
 	yarn vite build --mode test-utils
-	yarn vite build --mode lib
 	rm -rf build/ts
 	yarn tsc
 	node bin/api-extractor.js

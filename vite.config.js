@@ -1,8 +1,9 @@
 import * as path from "path";
 import { defineConfig } from "vite";
 import legacy from "@vitejs/plugin-legacy";
+import { useDynamicPublicPath } from "vite-plugin-dynamic-publicpath";
 
-import { peerDependencies, devDependencies } from "./package.json";
+import { peerDependencies } from "./package.json";
 import { resolve } from "path";
 
 export default defineConfig(({ mode }) => {
@@ -29,9 +30,7 @@ export default defineConfig(({ mode }) => {
   const isLibrary = !isBundled && !isDev;
 
   const entrypoint = `frontend/index.${mode}.ts`;
-  const outDir = isBundled ? "pyck/core/static/" : `build/${mode}/`;
-
-  console.log({ isBundled, isDev, isLibrary, outDir, entrypoint });
+  const outDir = isBundled ? "pyck/core/static/groundwork/" : `build/${mode}/`;
 
   const alias = !isTestUtils
     ? []
@@ -41,7 +40,8 @@ export default defineConfig(({ mode }) => {
       }));
 
   return {
-    base: "/static/",
+    // In bundled mode, we use the dynamicPublicPath plugin instead of a hardcoded asset path
+    base: isBundled ? "" : "/static/",
     optimizeDeps: {
       entries: [entrypoint],
     },
@@ -50,6 +50,12 @@ export default defineConfig(({ mode }) => {
         legacy({
           polyfills: false,
           targets: ["defaults", "not IE 11"],
+        }),
+      isBundled &&
+        // In bundled mode, we need to inject STATIC_URL into templates and pick it up with these
+        useDynamicPublicPath({
+          dynamicImportHandler: "window.__groundwork_dynamic_handler__",
+          dynamicImportPreload: "window.__groundwork_dynamic_preload__",
         }),
     ]),
     resolve: {
@@ -82,10 +88,5 @@ export default defineConfig(({ mode }) => {
 });
 
 const TEST_MOCKS = ["mapbox-gl"];
-
-/** Return the entry file for the current build configuration. */
-const getEntrypoint = (mode) => {
-  return "index.ts";
-};
 
 const compact = (array) => array.filter((item) => !!item);
