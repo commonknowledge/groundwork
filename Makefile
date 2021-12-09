@@ -111,8 +111,8 @@ ci: lint build-docs build-js build-python
 
 .PHONY: set-release-version
 set-release-version:
-	yarn version --new-version $$(GITHUB_REF_NAME=tags/v0.1.1 poetry run python bin/get_release_version.py)
-	poetry version $$(GITHUB_REF_NAME=tags/v0.1.1 poetry run python bin/get_release_version.py)
+	yarn version --new-version $$(poetry run python bin/get_release_version.py)
+	poetry version $$(poetry run python bin/get_release_version.py)
 
 .PHONY: build-js
 build-js:

@@ -1,8 +1,7 @@
 name: release
 on:
-  pull_request:
-    branches:
-      - main
+  release:
+    types: [published]
 jobs:
   release:
     runs-on: ubuntu-latest
