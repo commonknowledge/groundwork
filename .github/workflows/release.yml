@@ -15,6 +15,7 @@ jobs:
       env:
         DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
         DEBUG: True
+        PY_IGNORE_IMPORTMISMATCH: 1
     services:
       db:
         image: kartoza/postgis:latest
