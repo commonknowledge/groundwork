@@ -1,4 +1,4 @@
-Groundwork is distributed as a Python library [via PyPI](https://pypi.org/project/groundwork-django/). Frontend components are distibuted [via NPM](https://npmjs.org/package/groundwork-ui).
+Groundwork is distributed as a Python library [via PyPI](https://pypi.org/project/groundwork-django/). Frontend components are distibuted [via NPM](https://npmjs.org/package/groundwork-django).
 
 ## Using a starter kit
 

@@ -1,7 +1,7 @@
-declare module "groundwork-ui" {
-  export * from "groundwork-ui/build/lib";
+declare module "groundwork-django" {
+  export * from "groundwork-django/build/lib";
 }
 
-declare module "groundwork-ui/test-utils" {
-  export * from "groundwork-ui/build/test-utils";
+declare module "groundwork-django/test-utils" {
+  export * from "groundwork-django/build/test-utils";
 }

@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => {
   // - Some dependencies externalised (see package.json peerDependencies field)
   //
   // Test-utils mode:
-  // - JS distributed via npm. Available via `import 'groundwork-ui/test-utils'`
+  // - JS distributed via npm. Available via `import 'groundwork-django/test-utils'`
   // - Some dependencies included in bundle.
   // - Some dependencies externalised (see package.json peerDependencies field)
   // - Some dependencies that will throw in test environments (such as mapbox) replaced with the mock we use internally

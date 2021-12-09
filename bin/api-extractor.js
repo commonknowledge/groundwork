@@ -51,8 +51,8 @@ const invoke = (slug) => {
   });
 };
 
-// import * from 'groundwork-ui/test-utils'
+// import * from 'groundwork-django/test-utils'
 invoke("test-utils");
 
-// import * from 'groundwork-ui'
+// import * from 'groundwork-django'
 invoke("lib");
