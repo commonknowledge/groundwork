@@ -28,6 +28,8 @@ class MockMap extends EventEmitter implements MockedMethods {
     return this.options?.container as HTMLElement;
   }
 
+  resize() {}
+
   addLayer(layer: mapboxgl.AnyLayer): mapboxgl.Map {
     this.layers.set(layer.id, layer);
     return this as any;

@@ -1,5 +1,6 @@
 # Ignore artifacts:
 dist
+build
 static
 node_modules
 .*_cache
