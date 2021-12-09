@@ -30,6 +30,8 @@ export default class MapController extends Controller {
   private configTargets!: HTMLElement[];
 
   initialize() {
+    loadCss();
+
     if (!this.canvasTarget) {
       console.error(
         'No canvas target registered with map controller. Add a child with the attribute `data-map-target="canvas"`'
@@ -57,7 +59,6 @@ export default class MapController extends Controller {
   }
 
   async connect() {
-    await loadCss();
     const mapbox = await this.mapbox;
     if (!mapbox) {
       return;

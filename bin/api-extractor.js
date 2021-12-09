@@ -2,6 +2,9 @@ const { ExtractorConfig, Extractor } = require("@microsoft/api-extractor");
 
 const IGNORED_SYMBOLS = ["mapbox-gl"];
 
+/**
+ * Rollup the d.ts files produced by typescript into single files to go with the rolled-up library.
+ */
 const invoke = (slug) => {
   const packageJson = require("../package.json");
   const peerDependencies = new Set([
@@ -48,5 +51,8 @@ const invoke = (slug) => {
   });
 };
 
+// import * from 'groundwork-ui/test-utils'
 invoke("test-utils");
+
+// import * from 'groundwork-ui'
 invoke("lib");
