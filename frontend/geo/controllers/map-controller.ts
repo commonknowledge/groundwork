@@ -10,7 +10,7 @@ import { createCssLoader } from "../../core/util/css-utils";
  *
  * Symbol used to attach mapbox instance to dom element.
  */
-export const MAPBOX_MAP_SYMBOL = Symbol("mapbox-instance");
+export const MAPBOX_MAP_SYMBOL = "__mapbox_instance";
 
 export default class MapController extends Controller {
   static targets = ["canvas", "config"];
@@ -51,6 +51,7 @@ export default class MapController extends Controller {
       (this.element as HTMLElement).style.position = "relative";
     }
 
+    this.canvasTarget.style.opacity = "0";
     this.canvasTarget.style.width = "100%";
     this.canvasTarget.style.height = "100%";
   }
@@ -113,7 +114,11 @@ export default class MapController extends Controller {
 
       // Wait for the map to finish loading before resolving.
       map.on("load", () => {
-        resolve(map);
+        map.resize();
+        setTimeout(() => {
+          this.canvasTarget.style.opacity = "1";
+          resolve(map);
+        }, 120);
       });
     });
   }
