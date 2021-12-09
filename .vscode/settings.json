@@ -1,5 +1,5 @@
 {
-  "python.pythonPath": "/home/vscode/.cache/pypoetry/virtualenvs/groundwork-SsXfCHgY-py3.9/bin/python",
+  "python.pythonPath": "/home/vscode/.cache/pypoetry/virtualenvs/groundwork-django-SsXfCHgY-py3.9/bin/python",
   "python.linting.pylintEnabled": false,
   "python.linting.mypyEnabled": false,
   "python.linting.banditEnabled": true,

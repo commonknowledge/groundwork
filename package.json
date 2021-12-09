@@ -1,21 +1,30 @@
 {
-  "name": "groundwork-ui",
-  "version": "1.0.0",
+  "name": "groundwork-django",
+  "version": "0.1.0",
   "repository": "https://github.com/commonknowledge/groundwork.git",
   "description": "An integrated Django and Javascript framework for people who build tools for organisers.",
   "author": "Common Knowledge <developers@commonknowledge.coop>",
   "license": "GPL-3.0-only",
+  "types": "types.d.ts",
   "scripts": {
     "test": "jest"
   },
   "dependencies": {},
   "devDependencies": {
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
     "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo": "^7.0.1",
+    "@microsoft/api-extractor": "^7.18.20",
     "@testing-library/dom": "^8.11.1",
     "@types/jest": "^27.0.3",
     "@types/mapbox-gl": "^2.4.2",
     "@vitejs/plugin-legacy": "^1.6.2",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^27.4.2",
+    "babel-preset-vite": "^1.0.4",
+    "es-module-lexer": "^0.9.3",
+    "events": "^3.3.0",
     "jest": "^27.3.1",
     "mapbox-gl": "^2.6.0",
     "mutationobserver-shim": "^0.3.7",
@@ -25,18 +34,24 @@
     "ts-jest": "^27.0.7",
     "typescript": "^4.4.4",
     "vite": "^2.6.14",
-    "vite-tsconfig-paths": "^3.3.17"
+    "vite-plugin-dynamic-publicpath": "^1.1.0"
   },
   "peerDependencies": {
-    "@hotwired/stimulus": "^3.0.1"
+    "@hotwired/stimulus": "^3.0.1",
+    "@testing-library/dom": "^8.11.1"
   },
   "files": [
-    "dist"
+    "build/lib",
+    "build/test-utils",
+    "types.d.ts"
   ],
-  "module": "./dist/index.js",
+  "module": "./build/lib/index.js",
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": "./build/lib/index.js"
+    },
+    "./test-utils": {
+      "import": "./build/test-utils/index.js"
     }
   }
 }

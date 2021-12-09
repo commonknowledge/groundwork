@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from django.db import models
 from django.test import TestCase
 
-from pyck.core.datasources import MockDatasource, SyncConfig, SyncedModel
+from groundwork.core.datasources import MockDatasource, SyncConfig, SyncedModel
 
 
 class SyncedModelTestCase(TestCase):

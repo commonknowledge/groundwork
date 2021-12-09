@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from pyck.core.cache import cache, django_cached, django_cached_model_property
+from groundwork.core.cache import cache, django_cached, django_cached_model_property
 
 
 class CacheTestCase(TestCase):

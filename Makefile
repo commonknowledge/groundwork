@@ -30,7 +30,7 @@ migrate:
 	poetry run python manage.py migrate
 
 .PHONY: bootstrap
-bootstrap: install pre-commit-install migrate
+bootstrap: poetry-download install pre-commit-install migrate
 	touch local.py
 
 
@@ -59,7 +59,7 @@ python-api-docs:
 component-docs:
 	rm -rf docs/components
 	mkdir -p docs/components
-	cp pyck/**/docs/*.components.md docs/components/
+	cp groundwork/**/docs/*.components.md docs/components/
 
 .PHONY: api-docs
 api-docs: python-api-docs component-docs
@@ -88,7 +88,7 @@ test:
 check-codestyle:
 	poetry run isort --diff --check-only --settings-path pyproject.toml ./
 	poetry run black --diff --check --config pyproject.toml ./
-	poetry run darglint --docstring-style google --verbosity 2 pyck
+	poetry run darglint --docstring-style google --verbosity 2 groundwork
 	yarn tsc --noemit
 	yarn prettier --check .
 
@@ -96,23 +96,50 @@ check-codestyle:
 check-safety:
 	poetry check
 	poetry run safety check --full-report
-	poetry run bandit -ll --recursive pyck tests
+	poetry run bandit -ll --recursive groundwork tests
 
 .PHONY: lint
 lint: check-codestyle check-safety test
 
 .PHONY: ci
-ci: lint
+ci: lint build-docs build-js build-python
 	poetry run pytest
 	yarn test
 
 
-#* Assets
+#* Build & release flow
 
-.PHONY: build
-build:
+.PHONY: set-release-version
+set-release-version:
+	yarn version --new-version $$(poetry run python bin/get_release_version.py)
+	poetry version $$(poetry run python bin/get_release_version.py)
+
+.PHONY: build-js
+build-js:
+	yarn vite build --mode lib
 	yarn vite build --mode bundled
-	yarn vite build
+	yarn vite build --mode test-utils
+	rm -rf build/ts
+	yarn tsc
+	node bin/api-extractor.js
+
+.PHONY: build-python
+build-python: build-js
+	rm -rf groundwork/core/static
+	cp -r build/bundled groundwork/core/static
+	poetry build
+	rm -rf groundwork/core/static
+
+.PHONY: prepare-release
+prepare-release: clean-all set-release-version build-js build-python
+
+.PHONY: release
+release:
+	echo //registry.npmjs.org/:_authToken=$$NPM_TOKEN > ~/.npmrc
+	npm publish
+	poetry config pypi-token.pypi $$PYPI_TOKEN
+	poetry publish
+
 
 
 #* Cleaning
@@ -123,7 +150,7 @@ pycache-remove:
 
 .PHONY: build-remove
 build-remove:
-	rm -rf build/ dist/ docs/api/ docs/components/ temp/
+	rm -rf build/ groundwork/core/static/ docs/api/ docs/components/ temp/
 
 .PHONY: clean-all
 clean-all: pycache-remove build-remove

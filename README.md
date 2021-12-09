@@ -1,4 +1,4 @@
-# Pycommonknowledge
+# Groundwork
 
 An integrated Django and Javascript framework for people who build tools for organisers.
 

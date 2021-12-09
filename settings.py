@@ -19,8 +19,8 @@ SECRET_KEY = (
 )
 
 INSTALLED_APPS = [
-    "pyck.core",
-    "pyck.geo",
+    "groundwork.core",
+    "groundwork.geo",
     "test",
     "example",
     "django_vite",

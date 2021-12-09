@@ -12,6 +12,10 @@ authors = ["Common Knowledge <hello@commonknowledge.coop>"]
 license = "GNU GPL v3.0"
 repository = "https://github.com/commonknowledge/groundwork"
 homepage = "https://groundwork.commonknowledge.coop/"
+packages = [
+    { include = "groundwork" }
+]
+exclude = []
 
 # Keywords description https://python-poetry.org/docs/pyproject/#keywords
 keywords = []  #! Update me

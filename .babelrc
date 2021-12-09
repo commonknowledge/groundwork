@@ -1,0 +1,14 @@
+{
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          { "targets": { "esmodules": false, "node": "current" } }
+        ],
+        "babel-preset-vite",
+        "@babel/preset-typescript"
+      ]
+    }
+  }
+}
