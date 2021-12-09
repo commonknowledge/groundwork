@@ -42,6 +42,11 @@ export default defineConfig(({ mode }) => {
   return {
     // In bundled mode, we use the dynamicPublicPath plugin instead of a hardcoded asset path
     base: isBundled ? "" : "/static/",
+
+    // Treat css as a static asset, so that we can do the head tag injection ourselves.
+    // Vite's css pipeline doesn't play nicely with libraries – it bundles everything into a root css file,
+    // which we don't want here.
+    // assetsInclude: isBundled ? undefined : ["mapbox-gl/dist/mapbox-gl.css"],
     optimizeDeps: {
       entries: [entrypoint],
     },
@@ -63,6 +68,7 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       manifest: isBundled,
+      cssCodeSplit: true,
       emptyOutDir: true,
       outDir,
       rollupOptions: {

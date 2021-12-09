@@ -1,8 +1,9 @@
-import "mapbox-gl/dist/mapbox-gl.css";
+import mapboxCSS from "mapbox-gl/dist/mapbox-gl.css";
 
 import { Controller } from "@hotwired/stimulus";
 import mapbox from "mapbox-gl";
-import { getReferencedData } from "../../core/util/stimulus-utils";
+import { getReferencedData } from "../../core";
+import { createCssLoader } from "../../core/util/css-utils";
 
 /**
  * @internal
@@ -55,6 +56,7 @@ export default class MapController extends Controller {
   }
 
   async connect() {
+    await loadCss();
     const mapbox = await this.mapbox;
     if (!mapbox) {
       return;
@@ -116,3 +118,6 @@ export default class MapController extends Controller {
     });
   }
 }
+
+const loadCss =
+  import.meta.env.MODE !== "bundled" ? createCssLoader(mapboxCSS) : () => {};
