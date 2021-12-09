@@ -27,6 +27,10 @@ jobs:
           POSTGRES_PORT: 5432
     steps:
       - uses: actions/checkout@v2
+      - name: setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
       - uses: actions/cache@v2
         with:
           path: /home/runner/docker/.cache/poetry
