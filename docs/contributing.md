@@ -24,3 +24,9 @@ Some additional pointers:
 ## Improvements to documentation
 
 Yes please!
+
+## Releases
+
+Releases are published to package managers when a release tag in `vX.X.X` format is published in GitHub.
+
+We follow the [Semantic Versioning](https://semver.org/) spec for release numbers.
