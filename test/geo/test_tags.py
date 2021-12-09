@@ -8,7 +8,7 @@ from django.test import TestCase, override_settings
 class GeoTagsTestCase(TestCase):
     def test_renders_map(self):
         html = render_template(
-            "{% load ckgeo_tags %}" '{% map class="w-100" zoom=9 %}' "{% endmap %}"
+            "{% load groundwork_geo %}" '{% map class="w-100" zoom=9 %}' "{% endmap %}"
         )
 
         self.assertInHTML(

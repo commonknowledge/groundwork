@@ -7,7 +7,7 @@ Renders a Map onto the page.
 === "Django API"
 
     ```django
-    {% load ckgeo_tags %}
+    {% load groundwork_geo %}
 
     {% map class="my-map-class" center="[4.53,52.22]" zoom=9 %}
     <!-- Map config tags go here -->
@@ -77,7 +77,7 @@ Adds a datasource to a map.
 === "Django API"
 
     ```django
-    {% load ckgeo_tags %}
+    {% load groundwork_geo %}
 
     {% map %}
         {% map_source id="my_datasource_id" data=my_datasource %}
@@ -125,7 +125,7 @@ Adds a layer to a map.
 === "Django API"
 
     ```django
-    {% load ckgeo_tags %}
+    {% load groundwork_geo %}
 
     {% map %}
         {% map_layer layer=my_layer %}
