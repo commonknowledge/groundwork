@@ -28,8 +28,7 @@ DJANGO_VITE_DEV_SERVER_HOST = getattr(
 )
 
 # Default Vite server port.
-DJANGO_VITE_DEV_SERVER_PORT = getattr(
-    settings, "GROUNDWORK_VITE_DEV_SERVER_PORT", 3000)
+DJANGO_VITE_DEV_SERVER_PORT = getattr(settings, "GROUNDWORK_VITE_DEV_SERVER_PORT", 3000)
 
 # Default Vite server path to HMR script.
 DJANGO_VITE_WS_CLIENT_URL = getattr(
@@ -44,8 +43,7 @@ STATIC_URL = urljoin(settings.STATIC_URL, "groundwork/")
 # In Django production mode this folder need to be collected as static
 # files using "python manage.py collectstatic".
 if settings.DEBUG:
-    DJANGO_VITE_ASSETS_PATH = path_join(
-        GROUNDWORK_CORE_PATH, "static", "groundwork")
+    DJANGO_VITE_ASSETS_PATH = path_join(GROUNDWORK_CORE_PATH, "static", "groundwork")
 else:
     DJANGO_VITE_ASSETS_PATH = path_join(settings.STATIC_ROOT, "groundwork")
 
@@ -111,8 +109,7 @@ class GroundworkAssetLoader:
 
         tags = []
         manifest_entry = self._manifest[path]
-        scripts_attrs = scripts_attrs or {
-            "type": "module", "async": "", "defer": ""}
+        scripts_attrs = scripts_attrs or {"type": "module", "async": "", "defer": ""}
 
         # Add dependent CSS
         tags.extend(self._generate_css_files_of_asset(path, []))
@@ -162,16 +159,14 @@ class GroundworkAssetLoader:
         if "imports" in manifest_entry:
             for import_path in manifest_entry["imports"]:
                 tags.extend(
-                    self._generate_css_files_of_asset(
-                        import_path, already_processed)
+                    self._generate_css_files_of_asset(import_path, already_processed)
                 )
 
         if "css" in manifest_entry:
             for css_path in manifest_entry["css"]:
                 if css_path not in already_processed:
                     tags.append(
-                        GroundworkAssetLoader._generate_stylesheet_tag(
-                            css_path)
+                        GroundworkAssetLoader._generate_stylesheet_tag(css_path)
                     )
 
                 already_processed.append(css_path)
