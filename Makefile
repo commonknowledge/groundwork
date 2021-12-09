@@ -111,7 +111,7 @@ ci: lint build-docs build-js build-python
 
 .PHONY: set-release-version
 set-release-version:
-	yarn version --new-version $$(poetry run python bin/get_release_version.py)
+	npm version --new-version $$(poetry run python bin/get_release_version.py) --no-git-tag-version
 	poetry version $$(poetry run python bin/get_release_version.py)
 
 .PHONY: build-js
