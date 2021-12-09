@@ -1,10 +1,10 @@
-name: ci
+name: release
 on:
   pull_request:
     branches:
       - main
 jobs:
-  lint-and-test:
+  release:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/commonknowledge/do-app-baseimage-django-node:364385f9d196a2bbe2d5faea025520cc0316501f
@@ -34,6 +34,8 @@ jobs:
       - run: .github/bin/wait-for-it.sh db:5432
       - run: make lint
       - run: make prepare-release
+        env:
+          GITHUB_REF: v1.0.1
       - run: make release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
