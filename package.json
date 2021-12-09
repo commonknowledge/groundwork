@@ -5,6 +5,7 @@
   "description": "An integrated Django and Javascript framework for people who build tools for organisers.",
   "author": "Common Knowledge <developers@commonknowledge.coop>",
   "license": "GPL-3.0-only",
+  "types": "types.d.ts",
   "scripts": {
     "test": "jest"
   },
@@ -36,7 +37,8 @@
   },
   "files": [
     "build/lib",
-    "build/test-utils"
+    "build/test-utils",
+    "types.d.ts"
   ],
   "module": "./build/lib/index.js",
   "exports": {
