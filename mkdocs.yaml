@@ -1,9 +1,11 @@
 site_name: Groundwork
 site_url: https://groundwork.commonknowledge.coop/
 repo_url: https://github.com/commonknowledge/groundwork/
+edit_uri: edit/main/docs/
 nav:
   - Home: index.md
   - Guides:
+      - Getting Started: guides/getting-started.md
       - Data Pipeline: guides/data-pipeline.md
   - Reference:
       - Core:
