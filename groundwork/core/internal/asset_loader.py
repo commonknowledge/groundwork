@@ -124,9 +124,13 @@ class GroundworkAssetLoader:
 
         return "\n".join(tags)
 
-    def generate_dynamic_handlers(self) -> None:
+    def generate_dynamic_handlers(self) -> str:
         """
-        Return script tags to inform the loader how to resolve dynamic imports
+        Generates a <script> tag informing the client-side js how to resolve dynamic imports based on Django's
+        STATIC_URL configuration.
+
+        Returns:
+            The <script> tag.
         """
 
         scripts = ";".join(
