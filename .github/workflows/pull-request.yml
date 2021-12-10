@@ -33,3 +33,6 @@ jobs:
           key: do-app-baseimage-django-node:364385f9d196a2bbe2d5faea025520cc0316501f-poetry-${{ hashFiles('poetry.lock') }}
       - run: make install
       - run: make ci
+        env:
+          EXAMPLE_AIRTABLE_BASE: ${{ secrets.EXAMPLE_AIRTABLE_BASE }}
+          EXAMPLE_AIRTABLE_API_KEY: ${{ secrets.EXAMPLE_AIRTABLE_API_KEY }}
