@@ -166,9 +166,9 @@ Adds a marker to a map at a location. Supports custom html markup to define the 
 !!! note
 
     Note that this API is intended for displaying a relatively small number of markers on the map. It performs badly with large quantities of data, but trades this off for being relatively simple to use and being easy to add custom
-    interactions to.
+    interactions to. It's better suited to Detail views than List ones.
 
-    For displaying large datasets, you should consider clustering your points (component for this forthcoming!)
+    For displaying large datasets, you should consider clustering your points and fetching on demand (support for this forthcoming!)
 
 === "Django API"
 
@@ -198,9 +198,9 @@ Adds a marker to a map at a location. Supports custom html markup to define the 
         data-map-api-key-value="xxx"
     >
         <div
-            data-controller="map-layer"
+            data-controller="map-marker"
             data-map-target="config"
-            data-map-layer-layer-value='{"id": "terrain-data", "type": "line", "source": "mapbox-terrain", ...}'
+            data-map-marker-location-value="[4.53,52.22]"
         >
         </div>
         <div data-map-target="canvas"></div>
@@ -209,5 +209,8 @@ Adds a marker to a map at a location. Supports custom html markup to define the 
 
     __Parameters__
 
-    __`layer`__
-    : JSON object conforming to the [Mapbox layer specification](https://docs.mapbox.com/mapbox-gl-js/style-spec/layers/)
+    __`location`__
+    : Longitude-latitude array locating the map marker.
+
+    __`children`__
+    : HTML markup for the marker. If omitted, the default Mapbox marker is used.
