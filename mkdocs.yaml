@@ -19,6 +19,9 @@ nav:
           - UK Geographical Data:
               - Postcode Geolocation: api/groundwork.geo.territories.uk.postcodes.md
               - Parliament API: api/groundwork.geo.territories.uk.parliament.md
+      - Integrations:
+          - Airtable:
+              - Data Sources: api/groundwork.contrib.airtable.datasources.md
   - Contributing:
       - Contribution Guidelines: contributing.md
       - Developer Setup: developing.md

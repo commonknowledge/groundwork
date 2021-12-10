@@ -21,6 +21,7 @@ SECRET_KEY = (
 INSTALLED_APPS = [
     "groundwork.core",
     "groundwork.geo",
+    "groundwork.contrib.airtable",
     "test",
     "example",
     "django_vite",
