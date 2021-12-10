@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import mapboxgl, { AnySourceImpl } from "mapbox-gl";
+import type { AnySourceImpl, LngLatLike } from "mapbox-gl";
 
 type MockedMethods = Pick<
   mapboxgl.Map,
@@ -63,4 +63,21 @@ class MockSource {
   constructor(readonly type: string) {}
 }
 
-export default { Map: MockMap };
+class MockMarker {
+  _lngLat?: LngLatLike;
+
+  setLngLat(ll: LngLatLike) {
+    this._lngLat = ll;
+    return this;
+  }
+
+  addTo() {
+    return this;
+  }
+
+  getLngLat() {
+    return this._lngLat;
+  }
+}
+
+export default { Map: MockMap, Marker: MockMarker };

@@ -1,6 +1,7 @@
 <slot
   data-controller="{{controller}}"
   data-map-target="config"
+  style="display: none"
   {% for key, value in values.items %}
   {% if value %}data-{{controller}}-{{key}}-value="{{value}}"{% endif %}
   {% endfor %}
@@ -8,6 +9,7 @@
   {% if value %}{{key}}="{{value}}"{% endif %}
   {% endfor %}
 >
+  {{children}}
 </slot>
 {% for key, value in json.items %}
 {{value|json_script:key}}

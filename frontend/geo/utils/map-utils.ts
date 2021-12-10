@@ -21,6 +21,7 @@ export class MapConfigController<T = void> extends Controller {
   disconnect() {
     if (this.map) {
       this.disconnectMap(this.map);
+      this.map = undefined;
     }
   }
 

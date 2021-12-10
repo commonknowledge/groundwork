@@ -1,6 +1,6 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional, Union
 
-import functools
+import json
 
 from django import template
 from django.conf import settings
@@ -12,8 +12,11 @@ from groundwork.core.template import register_block_tag
 
 register = Library()
 
+JsonLiteralOrObject = Union[str, Dict, List]
+
 
 MAP_TEMPLATE = get_template("groundwork/geo/components/map.html")
+MAP_CONFIG_TEMPLATE = get_template("groundwork/geo/components/map_config.html")
 
 
 @register_block_tag(library=register, takes_context=True)
@@ -38,12 +41,27 @@ def map(
             "element": element,
             "values": (
                 ("api-key", api_key),
-                ("center", center),
-                ("style", style),
-                ("zoom", zoom),
+                ("center", _to_json_str(center)),
+                ("style", _to_json_str(style)),
+                ("zoom", _to_json_str(zoom)),
             ),
             "attrs": tuple(attrs.items()),
             "slots": children.render(context) if children else "",
+        }
+    )
+
+
+@register_block_tag(library=register, takes_context=True, upto="endmarker")
+def map_marker(
+    context: Any,
+    location: JsonLiteralOrObject,
+    children: Optional[template.NodeList] = None,
+):
+    return MAP_CONFIG_TEMPLATE.render(
+        {
+            "controller": "map-marker",
+            "values": {"location": _to_json_str(location)},
+            "children": children.render(context) if children else "",
         }
     )
 
@@ -68,3 +86,13 @@ def map_layer(layer):
         "values": {"layer": "#" + ref},
         "json": {ref: layer},
     }
+
+
+def _to_json_str(val: JsonLiteralOrObject) -> Optional[str]:
+    if val is None or isinstance(val, (str, float, int)):
+        return val
+
+    if hasattr(val, "json"):
+        return _to_json_str(val.json)
+
+    return json.dumps(val)

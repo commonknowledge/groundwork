@@ -18,6 +18,18 @@ class GeoTagsTestCase(TestCase):
             html,
         )
 
+    def test_renders_map_marker(self):
+        html = render_template(
+            "{% load groundwork_geo %}"
+            '{% map_marker location="[1,1]" %}'
+            "{% endmarker %}"
+        )
+
+        self.assertInHTML(
+            '<slot data-controller="map-marker" data-map-target="config" style="display: none" data-map-marker-location-value="[1,1]"></slot>',
+            html,
+        )
+
 
 def render_template(content: str) -> Any:
     context = Context()

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% load groundwork_geo %}
+
+{% block content %}
+
+{% map class="vw-100 vh-100" center="[4.53,52.22]" zoom=9 %}
+  {% map_marker location="[4.53,52.22]" %}
+    <div style="width: 25px; height: 25px; border-radius: 50%; background-color: hotpink;"></div>
+  {% endmarker %}
+{% endmap %}
+
+{% endblock %}

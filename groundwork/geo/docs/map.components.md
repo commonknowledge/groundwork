@@ -158,3 +158,56 @@ Adds a layer to a map.
 
     __`layer`__
     : JSON object conforming to the [Mapbox layer specification](https://docs.mapbox.com/mapbox-gl-js/style-spec/layers/)
+
+## Map marker
+
+Adds a marker to a map at a location. Supports custom html markup to define the marker.
+
+!!! note
+
+    Note that this API is intended for displaying a relatively small number of markers on the map. It performs badly with large quantities of data, but trades this off for being relatively simple to use and being easy to add custom
+    interactions to.
+
+    For displaying large datasets, you should consider clustering your points (component for this forthcoming!)
+
+=== "Django API"
+
+    ```django
+    {% load groundwork_geo %}
+
+    {% map %}
+        {% map_marker location="[4.53,52.22]" %}
+            <div style="width: 25px; height: 25px; border-radius: 50%; background-color: hotpink;"></div>
+        {% endmarker %}
+    {% endmap %}
+    ```
+
+    __Parameters__
+
+    __`location`__
+    : Longitude-latitude array locating the map marker.
+
+    __`children`__
+    : HTML markup for the marker. If omitted, the default Mapbox marker is used.
+
+=== "Stimulus API"
+
+    ```html
+    <div
+        data-controller="map"
+        data-map-api-key-value="xxx"
+    >
+        <div
+            data-controller="map-layer"
+            data-map-target="config"
+            data-map-layer-layer-value='{"id": "terrain-data", "type": "line", "source": "mapbox-terrain", ...}'
+        >
+        </div>
+        <div data-map-target="canvas"></div>
+    </div>
+    ```
+
+    __Parameters__
+
+    __`layer`__
+    : JSON object conforming to the [Mapbox layer specification](https://docs.mapbox.com/mapbox-gl-js/style-spec/layers/)
