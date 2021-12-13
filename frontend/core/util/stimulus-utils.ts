@@ -61,7 +61,11 @@ export const getReferencedData = <T>(data: string): T | undefined => {
  */
 const deserializeValue = (val: any, type: SchemaField): any => {
   if (typeof type === "function") {
-    return type(getReferencedData<any>(val));
+    if (typeof val === "string") {
+      return type(getReferencedData<any>(val));
+    } else {
+      return type(val);
+    }
   }
 
   if (type == "number" && typeof val !== "undefined") {
@@ -114,7 +118,7 @@ type SchemaVal = {
 /** Possible values for fields in an event parameters schema */
 type SchemaField = keyof SchemaVal | ((x: object) => any);
 
-/** Infer the deserialized type from an event parameters schema */
+/** Infer the deserialized type from an event parameters */
 type SchemaType<S extends Dict<SchemaField>> = {
   [P in keyof S]: S[P] extends keyof SchemaVal
     ? SchemaVal[S[P]]

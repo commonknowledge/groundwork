@@ -134,6 +134,7 @@ export default class MapController extends Controller {
       .addTo(this.map);
 
     this.popups.add(popup);
+    return popup;
   }
 
   /**

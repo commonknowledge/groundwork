@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import type { AnySourceImpl, LngLatLike } from "mapbox-gl";
+import type { Popup, LngLatLike } from "mapbox-gl";
 
 type MockedMethods = Pick<
   mapboxgl.Map,
@@ -20,8 +20,32 @@ class MockMap extends EventEmitter implements MockedMethods {
     super();
 
     setTimeout(() => {
-      this.emit("load");
+      this.emit("load", {});
     });
+  }
+
+  on(event: string, layerOrListener: any, listener?: any): any {
+    if (listener) {
+      super.on(event + ":" + layerOrListener, listener);
+    } else {
+      super.on(event, layerOrListener);
+    }
+  }
+
+  off(event: string, layerOrListener: any, listener?: any): any {
+    if (listener) {
+      super.off(event + ":" + layerOrListener, listener);
+    } else {
+      super.off(event, layerOrListener);
+    }
+  }
+
+  emit(event: string, layerOrValue: any, value?: any): any {
+    if (value) {
+      super.emit(event + ":" + layerOrValue, value);
+    } else {
+      super.emit(event, layerOrValue);
+    }
   }
 
   getContainer() {
@@ -80,4 +104,35 @@ class MockMarker {
   }
 }
 
-export default { Map: MockMap, Marker: MockMarker };
+class MockPopup implements Partial<Popup> {
+  _lngLat: LngLatLike = [0, 0];
+  _el = document.createElement("div");
+
+  getElement() {
+    return this._el;
+  }
+
+  setLngLat(ll: LngLatLike) {
+    this._lngLat = ll;
+    return this as any;
+  }
+
+  getLngLat() {
+    return this._lngLat as any;
+  }
+
+  setHTML(html: string) {
+    this._el.innerHTML = html;
+    return this as any;
+  }
+
+  addTo() {
+    return this as any;
+  }
+
+  remove() {
+    return this as any;
+  }
+}
+
+export default { Map: MockMap, Marker: MockMarker, Popup: MockPopup };

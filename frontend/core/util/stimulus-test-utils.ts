@@ -112,3 +112,6 @@ export const createTestFixture = async ({
 export const getTestControllerIdentifier = (
   controller: ControllerConstructor
 ) => controller.name.toLowerCase().replace(/controller$/, "");
+
+export const customEvent = (detail: any) =>
+  new CustomEvent("SomeEventType", { detail });
