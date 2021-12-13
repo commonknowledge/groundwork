@@ -65,7 +65,7 @@ export default class MapController extends Controller {
     }
 
     // Give any config targets the opportunity to configure the map.
-    for (const target of this.configTargets) {
+    for (const target of [this.element, ...this.configTargets]) {
       target.dispatchEvent(
         new CustomEvent("map:ready", {
           bubbles: false,
@@ -116,6 +116,7 @@ export default class MapController extends Controller {
       // Wait for the map to finish loading before resolving.
       map.on("load", () => {
         map.resize();
+
         setTimeout(() => {
           this.canvasTarget.style.opacity = "1";
           resolve(map);

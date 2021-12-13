@@ -5,7 +5,7 @@
   {% for key, val in values %}
     {% if val %}data-map-{{key}}-value="{{val}}"{% endif %}
   {% endfor %}
-  data-controller="map"
+  data-controller="map map-popup"
 >
   {{slots}}
   <div data-map-target="canvas"></div>

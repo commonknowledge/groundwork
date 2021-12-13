@@ -166,7 +166,8 @@ Adds a marker to a map at a location. Supports custom html markup to define the 
 !!! note
 
     Note that this API is intended for displaying a relatively small number of markers on the map. It performs badly with large quantities of data, but trades this off for being relatively simple to use and being easy to add custom
-    interactions to. It's better suited to Detail views than List ones.
+    interactions to. It's better suited to focusing on a relatively small number of locations than allowing someone to
+    explore many.
 
     For displaying large datasets, you should consider clustering your points and fetching on demand (support for this forthcoming!)
 

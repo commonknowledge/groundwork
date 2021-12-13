@@ -14,7 +14,9 @@ export default class MapMarkerController extends MapConfigController<AnySourceDa
   initialize() {
     super.initialize();
 
-    const el = this.element.children[0]?.cloneNode() as HTMLElement | undefined;
+    const el = this.element.children[0]?.cloneNode(true) as
+      | HTMLElement
+      | undefined;
     this.marker = new mapbox.Marker(el);
   }
 
