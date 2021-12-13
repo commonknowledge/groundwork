@@ -2,8 +2,9 @@ import mapboxCSS from "mapbox-gl/dist/mapbox-gl.css";
 
 import { Controller } from "@hotwired/stimulus";
 import mapbox from "mapbox-gl";
-import { getReferencedData } from "../../core";
+import { getEventParameters, getReferencedData } from "../../core";
 import { createCssLoader } from "../../core/util/css-utils";
+import { toFeature, toLngLatLike } from "../utils/geo-utils";
 
 /**
  * @internal
@@ -25,6 +26,9 @@ export default class MapController extends Controller {
   private styleValue!: string;
   private centerValue!: string;
   private zoomValue!: number;
+
+  private popups = new Set<mapbox.Popup>();
+  private map?: mapbox.Map;
 
   private canvasTarget!: HTMLElement;
   private configTargets!: HTMLElement[];
@@ -59,13 +63,15 @@ export default class MapController extends Controller {
   }
 
   async connect() {
-    const mapbox = await this.mapbox;
+    const mapbox = await this.mapboxLoader;
     if (!mapbox) {
       return;
     }
 
+    this.map = mapbox;
+
     // Give any config targets the opportunity to configure the map.
-    for (const target of [this.element, ...this.configTargets]) {
+    for (const target of this.configTargets) {
       target.dispatchEvent(
         new CustomEvent("map:ready", {
           bubbles: false,
@@ -78,9 +84,89 @@ export default class MapController extends Controller {
   /**
    * Return the mapbox instance attached to the map canvas element.
    */
-  get mapbox() {
+  get mapboxLoader() {
     const el = this.canvasTarget as any;
     return el[MAPBOX_MAP_SYMBOL] as Promise<mapbox.Map> | undefined;
+  }
+
+  /**
+   * Action. Show a popup at the location described by the event.
+   */
+  showPopup(event: Event) {
+    event.stopPropagation();
+
+    if (!this.map) {
+      return;
+    }
+
+    let {
+      mapPopupFeature,
+      mapPopupContent,
+      mapPopupContentProperty = "content",
+    } = getEventParameters(event, {
+      mapPopupFeature: "object",
+      mapPopupContent: "html",
+      mapPopupContentProperty: "string",
+    });
+
+    if (!mapPopupContent) {
+      mapPopupContent =
+        toFeature(mapPopupFeature)?.properties?.[mapPopupContentProperty];
+    }
+
+    const location = toLngLatLike(mapPopupFeature);
+    if (!location) {
+      console.error(
+        "Not adding popup to map because required parameter `mapPopupFeature` is not a valid location"
+      );
+      return;
+    }
+    if (!mapPopupContent) {
+      console.error(
+        "Not adding popup to map because neither mapPopupFeature nor mapPopupContent parameters provide valid html content."
+      );
+      return;
+    }
+
+    const popup = new mapbox.Popup()
+      .setLngLat(location)
+      .setHTML(mapPopupContent)
+      .addTo(this.map);
+
+    this.popups.add(popup);
+  }
+
+  /**
+   * Action. Hides all popups.
+   */
+  hidePopup(event: Event) {
+    event.stopPropagation();
+
+    for (const popup of this.popups) {
+      popup.remove();
+    }
+
+    this.popups.clear();
+  }
+
+  /**
+   * Action. Fly the map to a specific location.
+   */
+  fly(event: Event) {
+    event.stopPropagation();
+
+    const { mapFlyLocation, mapFlyZoom } = getEventParameters(event, {
+      mapFlyLocation: toLngLatLike,
+      mapFlyZoom: "number",
+    });
+
+    if (mapFlyLocation || mapFlyZoom) {
+      this.map?.flyTo({
+        animate: true,
+        center: mapFlyLocation,
+        zoom: mapFlyZoom,
+      });
+    }
   }
 
   /**

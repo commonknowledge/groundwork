@@ -8,9 +8,10 @@
   {% map_marker location="[4.53,52.22]" %}
     <a
       style="width: 25px; height: 25px; border-radius: 50%; cursor: pointer; background-color: hotpink;"
-      data-action="click->map-popup#show"
-      data-map-popup-content='#my_feature'
-      data-map-popup-content-property='description'
+      data-action="click->map#showPopup click->map#fly"
+      data-map-popup-feature='#my_feature'
+      data-map-fly-location="#my_feature"
+      data-map-fly-zoom="10"
     >
     </a>
 
@@ -18,7 +19,7 @@
       {
         "type": "Feature",
         "properties": {
-          "description": "<strong>Muhsinah</strong><p>Jazz-influenced hip hop artist Muhsinah plays the Black Cat (1811 14th Street NW) tonight with Exit Clov and Gods’illa. 9:00 p.m. $12.</p>"
+          "content": "<strong>Muhsinah</strong><p>Jazz-influenced hip hop artist Muhsinah plays the Black Cat (1811 14th Street NW) tonight with Exit Clov and Gods’illa. 9:00 p.m. $12.</p>"
         },
         "geometry": {
           "type": "Point",

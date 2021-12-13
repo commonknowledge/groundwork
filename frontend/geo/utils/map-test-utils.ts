@@ -40,7 +40,7 @@ export const createConfigFixture = async <T extends MapConfigController>(
   await config.ready;
 
   return Object.assign(fixture, {
-    map: await map.mapbox,
+    map: await map.mapboxLoader,
     config,
   });
 };

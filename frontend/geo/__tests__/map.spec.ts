@@ -13,7 +13,7 @@ test("initializes mapbox and binds to canvas", async () => {
   });
 
   const map = fixture.getController(MapController, "map");
-  const mapbox = await map.mapbox;
+  const mapbox = await map.mapboxLoader;
 
   expect(mapbox?.getContainer()).toBe(fixture.getByTestId("canvas"));
 });
@@ -39,6 +39,6 @@ test("sets up config controllers", async () => {
   const config = fixture.getController(SomeConfigController, "config");
   await config.ready;
 
-  expect(config.map).toBe(await map.mapbox);
-  expect(connectMap).toBeCalledWith(await map.mapbox);
+  expect(config.map).toBe(await map.mapboxLoader);
+  expect(connectMap).toBeCalledWith(await map.mapboxLoader);
 });
