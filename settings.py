@@ -21,6 +21,7 @@ SECRET_KEY = (
 INSTALLED_APPS = [
     "groundwork.core",
     "groundwork.geo",
+    "groundwork.contrib.airtable",
     "test",
     "example",
     "django_vite",
@@ -193,6 +194,12 @@ LOGGING = {
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+# Test settings
+
+EXAMPLE_AIRTABLE_BASE = os.getenv("EXAMPLE_AIRTABLE_BASE")
+EXAMPLE_AIRTABLE_API_KEY = os.getenv("EXAMPLE_AIRTABLE_API_KEY")
+
 
 try:
     from local import *

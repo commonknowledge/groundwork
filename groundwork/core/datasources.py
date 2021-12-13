@@ -11,6 +11,7 @@ from typing import (
     cast,
 )
 
+import dataclasses
 import uuid
 from abc import ABCMeta, abstractmethod
 from dataclasses import dataclass
@@ -20,6 +21,7 @@ from io import BytesIO
 import requests
 from django.db import models
 from rest_framework import parsers, serializers
+from rest_framework_dataclasses.field_utils import get_type_info
 from rest_framework_dataclasses.serializers import DataclassSerializer
 
 from groundwork.core.cron import register_cron
@@ -149,7 +151,6 @@ class RestDatasource(Datasource[ResourceT]):
     def __init__(self, **kwargs: Dict[str, Any]) -> None:
         super().__init__(**kwargs)
 
-        self.url = f"{self.base_url}{self.path}"
         self.parser = self.parser_class()
 
         assert self.resource_type is not None
@@ -158,8 +159,31 @@ class RestDatasource(Datasource[ResourceT]):
             self.serializer_class = type(
                 f"{self.resource_type.__name__}Serializer",
                 (DataclassSerializer,),
-                {"Meta": type("Meta", (), {"dataclass": self.resource_type})},
+                {
+                    "Meta": type(
+                        "Meta",
+                        (),
+                        {
+                            "dataclass": self.resource_type,
+                            "extra_kwargs": {
+                                field.name: self.get_serializer_field_kwargs(field)
+                                for field in dataclasses.fields(self.resource_type)
+                            },
+                        },
+                    )
+                },
             )
+
+    def get_serializer_field_kwargs(self, field: dataclasses.Field):
+        type_info = get_type_info(field.type)
+
+        if type_info.base_type == str:
+            return {"allow_blank": True}
+
+        if type_info.is_mapping or type_info.is_many:
+            return {"allow_empty": True}
+
+        return {}
 
     def get(self, id: str, **kwargs: Dict[str, Any]) -> ResourceT:
         """
@@ -284,6 +308,10 @@ class RestDatasource(Datasource[ResourceT]):
         """
 
         yield from self.fetch_url(self.url, query)
+
+    @property
+    def url(self) -> str:
+        return f"{self.base_url}{self.path}"
 
 
 @dataclass
