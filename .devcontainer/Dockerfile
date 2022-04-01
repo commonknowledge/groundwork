@@ -1,6 +1,6 @@
 # [Choice] Python version: 3, 3.8, 3.7, 3.6
 ARG VARIANT=3
-FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}-bullseye
 
 ENV PYTHONUNBUFFERED 1
 
@@ -14,4 +14,18 @@ ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
 RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
-RUN curl https://raw.githubusercontent.com/commonknowledge/do-app-baseimage-django-node/439e8fecc8279266fcdd80942640000a1fb5a3ba/.bin/prepare.sh | /bin/bash
+RUN apt-get update
+RUN apt-get install -y \
+  curl \
+  git \
+  build-essential \
+  libpq-dev \
+  libjpeg62-turbo-dev \
+  zlib1g-dev \
+  libwebp-dev \
+  binutils \
+  libproj-dev \
+  gdal-bin \
+  g++
+
+USER vscode
