@@ -28,4 +28,11 @@ RUN apt-get install -y \
   gdal-bin \
   g++
 
+
+ENV POETRY_HOME=/usr/local
+RUN curl -sSL https://install.python-poetry.org | python3 -
+
 USER vscode
+
+ENV PATH=$PATH:/home/vscode/.local/bin
+RUN poetry config virtualenvs.create false
