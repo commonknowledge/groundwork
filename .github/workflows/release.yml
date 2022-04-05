@@ -35,6 +35,7 @@ jobs:
           path: /home/runner/docker/.cache/poetry
           key: do-app-baseimage-django-node:364385f9d196a2bbe2d5faea025520cc0316501f-poetry-${{ hashFiles('poetry.lock') }}
       - run: make install
+      - run: chmod +x .github/bin/wait-for-it.sh
       - run: .github/bin/wait-for-it.sh db:5432
       - run: make lint
       - run: make prepare-release
