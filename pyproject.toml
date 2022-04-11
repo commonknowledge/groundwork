@@ -39,7 +39,7 @@ djangorestframework-camel-case = "^1.2.0"
 djangorestframework-dataclasses = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
-django = '^4.0.3'
+django = '^4.0.4'
 django-vite = "^2.0.2"
 wagtail = '^2.16.1'
 bandit = "^1.7.0"
