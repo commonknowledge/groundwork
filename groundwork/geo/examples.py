@@ -18,8 +18,8 @@ class MapExampleView(TemplateView):
 
     @property
     def layers(self):
-        return [
-            {
+        return {
+            "terrain-data": {
                 "id": "terrain-data",
                 "type": "line",
                 "source": "mapbox-terrain",
@@ -27,7 +27,7 @@ class MapExampleView(TemplateView):
                 "layout": {"line-join": "round", "line-cap": "round"},
                 "paint": {"line-color": "#ff69b4", "line-width": 1},
             }
-        ]
+        }
 
 
 urlpatterns: List[Any] = [path("map/", MapExampleView.as_view())]

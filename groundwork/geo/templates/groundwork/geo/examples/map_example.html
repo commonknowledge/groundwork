@@ -9,7 +9,7 @@
     {% map_source id=id data=data %}
   {% endfor %}
 
-  {% for layer in view.layers %}
+  {% for layer in view.layers.items %}
     {% map_layer layer=layer %}
   {% endfor %}
 {% endmap %}
