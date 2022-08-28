@@ -50,7 +50,7 @@ def map(
 
 @register.inclusion_tag("groundwork/geo/components/map_config.html")
 def map_source(id, data):
-    ref = "map_source_config"
+    ref = "map_source_config" + "-" + id
 
     return {
         "controller": "map-source",
@@ -60,8 +60,8 @@ def map_source(id, data):
 
 
 @register.inclusion_tag("groundwork/geo/components/map_config.html")
-def map_layer(layer):
-    ref = "map_layer_config"
+def map_layer(id, layer):
+    ref = "map_layer_config" + "-" + id
 
     return {
         "controller": "map-layer",
