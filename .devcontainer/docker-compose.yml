@@ -29,6 +29,13 @@ services:
     # Use "forwardPorts" in **devcontainer.json** to forward an app port locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
+    volumes:
+      # Mounts the project folder to '/workspace'. The target path inside the container
+      # should match what your application expects. In this case, the compose file is
+      # in a sub-folder, so you will mount '..'. You would then reference this path as the
+      # 'workspaceFolder' in '.devcontainer/devcontainer.json' so VS Code starts here.
+      - ..:/workspace:cached
+
   db:
     image: kartoza/postgis:latest
     restart: unless-stopped

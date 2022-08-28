@@ -5,7 +5,10 @@
   "name": "Python 3 & PostgreSQL",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
-  "forwardPorts": [8000],
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [
+    8000
+  ],
   // Set *default* container specific settings.json values on container create.
   "settings": {
     "terminal.integrated.profiles.linux": {
