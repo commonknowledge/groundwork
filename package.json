@@ -21,7 +21,7 @@
     "@types/mapbox-gl": "^2.7.5",
     "@vitejs/plugin-legacy": "^1.6.2",
     "babel-core": "^6.26.3",
-    "babel-jest": "^27.4.2",
+    "babel-jest": "^29.0.2",
     "babel-preset-vite": "^1.0.4",
     "es-module-lexer": "^0.9.3",
     "events": "^3.3.0",
