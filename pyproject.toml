@@ -42,7 +42,7 @@ djangorestframework-dataclasses = "^1.0.0"
 django = '^4.1'
 django-vite = "^2.0.2"
 bandit = "^1.7.0"
-black = {version = "^22.3.0", allow-prereleases = true}
+black = {version = "^22.8.0", allow-prereleases = true}
 dj-database-url = '>=0.5.0'
 darglint = "^1.8.0"
 isort = {extras = ["colors"], version = "^5.9.3"}
