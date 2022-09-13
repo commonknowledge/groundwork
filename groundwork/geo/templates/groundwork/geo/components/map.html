@@ -8,5 +8,7 @@
   data-controller="map"
 >
   {{slots}}
-  <div data-map-target="canvas"></div>
+  {% if in_place != True %}
+    <div data-map-target="canvas"></div>
+  {% endif %}
 </{{element}}>
