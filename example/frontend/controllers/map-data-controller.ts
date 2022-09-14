@@ -11,8 +11,8 @@ export default class MapDataController extends MapConfigController {
 
   connectMap(map: Map) {
     map?.on(this.mapEventValue, (e) => {
-      if (!this.eventLogTarget) return
-      this.eventLogTarget.innerHTML = JSON.stringify(e, null, 2)
+      if (!this.eventLogTarget) return;
+      this.eventLogTarget.innerHTML = JSON.stringify(e, null, 2);
     });
   }
 }
