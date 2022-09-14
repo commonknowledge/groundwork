@@ -24,6 +24,7 @@ def map(
     api_key: Optional[str] = None,
     center: Any = None,
     zoom: Optional[int] = None,
+    in_place: Optional[bool] = True,
     children: Optional[template.NodeList] = None,
     **attrs: Dict[str, str],
 ) -> template.Node:
@@ -36,6 +37,7 @@ def map(
     return MAP_TEMPLATE.render(
         {
             "element": element,
+            "in_place": in_place,
             "values": (
                 ("api-key", api_key),
                 ("center", center),
