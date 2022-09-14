@@ -41,6 +41,7 @@ python = "^3.9"
 schedule = "^1.1.0"
 djangorestframework-camel-case = "^1.2.0"
 djangorestframework-dataclasses = "^1.0.0"
+setuptools = "^65.3.0"
 
 [tool.poetry.dev-dependencies]
 django = '^4.1'

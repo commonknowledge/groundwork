@@ -880,7 +880,7 @@ python-versions = ">=3.6"
 name = "setuptools"
 version = "65.3.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 
@@ -1067,7 +1067,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "7dfebb280ff9bbe8003d483b271b1a12e045a1554700fdd67642bde8ed05ae3a"
+content-hash = "baa97a38f777315db7e5f127c02af0992c8e564646d6ed72ba1629bf9d513f9f"
 
 [metadata.files]
 asgiref = [
