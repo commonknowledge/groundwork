@@ -48,6 +48,11 @@ def map(
     )
 
 
+@register.inclusion_tag("groundwork/geo/components/map_canvas.html")
+def map_canvas(element: str = "div", **attrs: Dict[str, str]):
+    return {"element": element, "attrs": tuple(attrs.items())}
+
+
 @register.inclusion_tag("groundwork/geo/components/map_config.html")
 def map_source(id, data):
     ref = "map_source_config" + "-" + id

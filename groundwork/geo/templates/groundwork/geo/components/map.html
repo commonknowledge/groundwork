@@ -9,6 +9,6 @@
 >
   {{slots}}
   {% if in_place != True %}
-    <div data-map-target="canvas"></div>
+    {% include "groundwork/geo/components/map_canvas.html" %}
   {% endif %}
 </{{element}}>

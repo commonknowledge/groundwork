@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load groundwork_geo %}
+
+{% block content %}
+
+{% map in_place=False class="vw-100 vh-100" center="[4.53,52.22]" zoom=9 %}
+  <div data-controller="map-data">
+    <h4>Inline popup with access to Map instance</h4>
+    <div data-map-data-target="eventlog"></div>
+  </div>
+  {% for id, data in view.sources.items %}
+    {% map_source id=id data=data %}
+  {% endfor %}
+
+  {% for layer in view.layers.items %}
+    {% map_layer layer=layer %}
+  {% endfor %}
+
+  {% map_canvas %}
+{% endmap %}
+
+{% endblock %}

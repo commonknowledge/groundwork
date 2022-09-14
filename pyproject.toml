@@ -5,7 +5,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "groundwork-django"
-version = "0.1.0"
+version = "0.1.5"
 description = "An integrated Django and Javascript framework for people who build tools for organisers."
 readme = "README.md"
 authors = ["Common Knowledge <hello@commonknowledge.coop>"]

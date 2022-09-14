@@ -5,8 +5,6 @@ from django.views.generic import TemplateView
 
 
 class MapExampleView(TemplateView):
-    template_name = "groundwork/geo/examples/map_example.html"
-
     @property
     def sources(self):
         return {
@@ -30,4 +28,17 @@ class MapExampleView(TemplateView):
         }
 
 
-urlpatterns: List[Any] = [path("map/", MapExampleView.as_view())]
+urlpatterns: List[Any] = [
+    path(
+        "map/",
+        MapExampleView.as_view(
+            template_name="groundwork/geo/examples/map_example.html"
+        ),
+    ),
+    path(
+        "complex-map/",
+        MapExampleView.as_view(
+            template_name="groundwork/geo/examples/complex_map_example.html"
+        ),
+    ),
+]

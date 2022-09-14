@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load groundwork_geo %}
+
+{% block content %}
+
+{% map in_place=False center="[4.53,52.22]" zoom=9 %}
+  <div
+    data-map-target="config"
+    data-controller="map-data"
+    data-map-data-map-event-value="click"
+    class="absolute bottom-0 left-0 p-3"
+  >
+    <h4>Inline popup with access to Map instance</h4>
+    <code data-map-data-target="eventLog">
+      <!-- On click, map event data will display here -->
+    </code>
+  </div>
+
+  {% for id, data in view.sources.items %}
+    {% map_source id=id data=data %}
+  {% endfor %}
+
+  {% for layer in view.layers.items %}
+    {% map_layer layer=layer %}
+  {% endfor %}
+
+  {% map_canvas class="vw-100 vh-100" %}
+{% endmap %}
+
+{% endblock %}
