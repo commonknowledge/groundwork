@@ -27,7 +27,7 @@ repos:
       # Sort ordering of python imports
       - id: isort
         name: isort
-        entry: poetry run isort --settings-path pyproject.toml
+        entry: poetry run isort --gitignore --settings-path pyproject.toml
         types: [python]
         language: system
 
@@ -39,3 +39,10 @@ repos:
         entry: poetry run black --config pyproject.toml
         types: [python]
         language: system
+
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+    rev: v1.3.0
+    hooks:
+      - id: python-safety-dependencies-check
+        files: pyproject.toml
+        args: [--full-report]
