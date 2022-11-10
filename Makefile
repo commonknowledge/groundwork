@@ -27,7 +27,7 @@ bootstrap: install pre-commit-install migrate
 .PHONY: codestyle
 codestyle:
 	poetry run pyupgrade --exit-zero-even-if-changed --py38-plus **/*.py
-	poetry run isort --settings-path pyproject.toml ./
+	poetry run isort --gitignore --settings-path pyproject.toml ./
 	poetry run black --config pyproject.toml ./
 	yarn prettier --write .
 
@@ -74,7 +74,7 @@ test:
 
 .PHONY: check-codestyle
 check-codestyle:
-	poetry run isort --diff --check-only --settings-path pyproject.toml ./
+	poetry run isort --gitignore --diff --check-only --settings-path pyproject.toml ./
 	poetry run black --diff --check --config pyproject.toml ./
 	poetry run darglint --docstring-style google --verbosity 2 groundwork
 	yarn tsc --noemit
