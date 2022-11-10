@@ -8,7 +8,7 @@ requires = [
 
 [tool.poetry]
 name = "groundwork-django"
-version = "0.1.6"
+version = "0.2.0"
 description = "An integrated Django and Javascript framework for people who build tools for organisers."
 readme = "README.md"
 authors = ["Common Knowledge <hello@commonknowledge.coop>"]
