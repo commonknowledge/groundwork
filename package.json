@@ -1,6 +1,6 @@
 {
   "name": "groundwork-django",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "repository": "https://github.com/commonknowledge/groundwork.git",
   "description": "An integrated Django and Javascript framework for people who build tools for organisers.",
   "author": "Common Knowledge <developers@commonknowledge.coop>",
@@ -29,6 +29,7 @@
     "babel-preset-vite": "^1.0.4",
     "es-module-lexer": "^0.9.3",
     "jest": "^27.3.1",
+    "mapbox-gl": "^2.6.0",
     "mutationobserver-shim": "^0.3.7",
     "prettier": "^2.4.1",
     "ts-jest": "^27.0.7",
