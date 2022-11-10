@@ -10,7 +10,10 @@ class PostcodesIOApiTests(TestCase):
     def test_geocodes_postcode(self):
         for example in self.EXAMPLE_POSTCODES:
             expected = self.to_value_type(**example)
-            self.assertEqual(postcodes.postcode.get(example["postcode"]), expected)
+            result = postcodes.postcode.get(example["postcode"])
+            self.assertEqual(result["postcode"], expected["postcode"])
+            self.assertAlmostEqual(result["longitude"], expected["longitude"])
+            self.assertEqual(result["codes"], expected["codes"])
 
     def to_value_type(self, codes, **kwargs):
         return postcodes.GeolocatedPostcode(codes=postcodes.OnsCodes(**codes), **kwargs)

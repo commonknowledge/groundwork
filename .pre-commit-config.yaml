@@ -21,7 +21,7 @@ repos:
         name: pyupgrade
         entry: pyupgrade --py38-plus
         types: [python]
-        language: system
+        language: python
 
   - repo: https://github.com/pycqa/isort
     rev: 5.10.1
@@ -41,4 +41,4 @@ repos:
         name: black
         entry: black --config pyproject.toml
         types: [python]
-        language: system
+        language: python
