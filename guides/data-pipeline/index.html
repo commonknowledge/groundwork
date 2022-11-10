@@ -1,0 +1,1482 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://groundwork.commonknowledge.coop/guides/data-pipeline/">
+      
+      <link rel="icon" href="../../img/logo.jpg">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.9">
+    
+    
+      
+        <title>Data Pipeline - Groundwork</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.08040f6c.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"IBM Plex Sans";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#about-datasources" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Groundwork" class="md-header__button md-logo" aria-label="Groundwork" data-md-component="logo">
+      
+  <img src="../../img/logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Groundwork
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data Pipeline
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/commonknowledge/groundwork/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getting-started/" class="md-tabs__link md-tabs__link--active">
+        Guides
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api/groundwork.core.datasources/" class="md-tabs__link">
+        Reference
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../contributing/" class="md-tabs__link">
+        Contributing
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Groundwork" class="md-nav__button md-logo" aria-label="Groundwork" data-md-component="logo">
+      
+  <img src="../../img/logo.jpg" alt="logo">
+
+    </a>
+    Groundwork
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/commonknowledge/groundwork/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Data Pipeline
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Data Pipeline
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#about-datasources" class="md-nav__link">
+    About datasources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchronising-data-from-a-remote-service" class="md-nav__link">
+    Synchronising data from a remote service
+  </a>
+  
+    <nav class="md-nav" aria-label="Synchronising data from a remote service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-your-model" class="md-nav__link">
+    Create your model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-a-cron-process" class="md-nav__link">
+    Configure a cron process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handling-relationships" class="md-nav__link">
+    Handling relationships
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#provided-datasources" class="md-nav__link">
+    Provided datasources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-your-own-datasource" class="md-nav__link">
+    Writing your own datasource
+  </a>
+  
+    <nav class="md-nav" aria-label="Writing your own datasource">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adapting-an-existing-client-library" class="md-nav__link">
+    Adapting an existing client library
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calling-a-rest-api" class="md-nav__link">
+    Calling a REST API
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          Core
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Core" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Core
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/groundwork.core.datasources/" class="md-nav__link">
+        Data sources
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/groundwork.core.cron/" class="md-nav__link">
+        Cron tasks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1_3" type="checkbox" id="__nav_3_1_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_1_3">
+          Utilities
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Utilities" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Utilities
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/groundwork.core.cache/" class="md-nav__link">
+        Cache utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/groundwork.core.template/" class="md-nav__link">
+        Template utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          Geo
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Geo" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Geo
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/map.components/" class="md-nav__link">
+        Map Components
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_2" type="checkbox" id="__nav_3_2_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_2">
+          UK Geographical Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="UK Geographical Data" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          UK Geographical Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/groundwork.geo.territories.uk.postcodes/" class="md-nav__link">
+        Postcode Geolocation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/groundwork.geo.territories.uk.parliament/" class="md-nav__link">
+        Parliament API
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          Integrations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Integrations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Integrations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_1" type="checkbox" id="__nav_3_3_1" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_1">
+          Airtable
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Airtable" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Airtable
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/groundwork.contrib.airtable.datasources/" class="md-nav__link">
+        Data Sources
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Contributing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contributing" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Contributing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        Contribution Guidelines
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developing/" class="md-nav__link">
+        Developer Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code-style/" class="md-nav__link">
+        Code Style
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#about-datasources" class="md-nav__link">
+    About datasources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchronising-data-from-a-remote-service" class="md-nav__link">
+    Synchronising data from a remote service
+  </a>
+  
+    <nav class="md-nav" aria-label="Synchronising data from a remote service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-your-model" class="md-nav__link">
+    Create your model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-a-cron-process" class="md-nav__link">
+    Configure a cron process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handling-relationships" class="md-nav__link">
+    Handling relationships
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#provided-datasources" class="md-nav__link">
+    Provided datasources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-your-own-datasource" class="md-nav__link">
+    Writing your own datasource
+  </a>
+  
+    <nav class="md-nav" aria-label="Writing your own datasource">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adapting-an-existing-client-library" class="md-nav__link">
+    Adapting an existing client library
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calling-a-rest-api" class="md-nav__link">
+    Calling a REST API
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/commonknowledge/groundwork/edit/main/docs/guides/data-pipeline.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+  <h1>Data Pipeline</h1>
+
+<p>Django ships out of the box with an excellent ORM for modeling data created and managed by our application. This is
+useful for several reasons, but mainly:</p>
+<ul>
+<li>Consistent conventions mean less surprises about how different things work.</li>
+<li>The standardised model/queryset format allows the framework to support generic views, forms and other components.</li>
+</ul>
+<p>Unfortunately, they don't help so much with external data - either public data that we want to be informed of changes to or data managed by external services.</p>
+<p>This gets particuarly tricky when we want to augment the remote data with our own data or there are API limits that require us to store the data locally and keep it up to date. We often end up writing lots of bug-prone glue code to manage this.</p>
+<p>Groundwork helps here by introducing a lightweight abstraction called a <code>Datasource</code>. It might be helpful to
+think of these as similar to Django' models and querysets, but for external APIs.</p>
+<p>In the examples that follow, we use a very common use-case for building out applications that help people organise. There is a campaign that needs to carve up people by the UK parliamentary constitutency they are in and add other information the campaign is concerned about that relate to it. The amount of people who support an action. The number of letter sent in this constituency to lobby an MP. There might be a model to represent this letter, for example.</p>
+<p>So we need to represent the constituencies and information about them against a source of truth, but augment this with things that we want to know about. But loading in all constituencies, or looking up this data on the fly, is slow or error prone. The data around constituencies also changes very infrequently.</p>
+<p>Datasources tries to solve for this situation which we have observed a fair amount in our own work and provide a lightweight API for doing so.</p>
+<h2 id="about-datasources">About datasources</h2>
+<p>A datasource is a simple interface that defines:</p>
+<ul>
+<li>A method to get objects by ID.</li>
+<li>A method to list (and optionally sort or filter) objects.</li>
+<li>A type that returned objects should be assumed to be instances of.</li>
+<li>A field on that type that provides the object's ID.</li>
+</ul>
+<p>You can check out the documentation for the <a href="../../api/groundwork.core.datasources/#externalresource">Datasource</a> class
+for more detail on this. For now, we'll look at one thing we can do with them – regularly synchronising data from a
+remote service.</p>
+<h2 id="synchronising-data-from-a-remote-service">Synchronising data from a remote service</h2>
+<p>For this example, we'll pull in a list of all the constituencies in the UK using Groundwork's built-in UK parliamentary
+datasource. It's not the most interesting example, but works for explaining things.</p>
+<p>We'll configure it to update periodically so that changes to UK constituencies are reflected in our local models.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Just because you <em>can</em> pull in lots of data in from other systems doesn't mean you <em>should</em>. Be mindful about any
+personal data that you're pulling in from CRMs, etc. Don't store more than you need, anonymise as necessary and
+ensure that your environment is secure relative to the sensitivity of the data you are storing and your threat
+model.</p>
+</div>
+<h3 id="create-your-model">Create your model</h3>
+<p>First, we'll create our model. To make this easier, we'll make the field names in our model match the field names in the datasource. The datasources provided with Groundwork are all documented and have type hints on the objects they return. The UK Parliament datasource is documented <a href="../../api/groundwork.geo.territories.uk.parliament/">here</a>.</p>
+<p>Some things to note:</p>
+<ul>
+<li>We're subclassing <a href="../../api/groundwork.core.datasources/#syncedmodel">SyncedModel</a>. This is needed to register the model with the sync manager.</li>
+<li>We configure where to fetch the data from, how often, and how to map it onto our local model using <a href="../../api/groundwork.core.datasources/#syncconfig">SyncConfig</a>.</li>
+<li>We need to store the id used by the remote data source. By default, this is called <code>external_id</code>, but you can customize this.</li>
+<li>We need to add the fields we want to save data from in our model. It's absolutely fine to leave out fields that you
+  don't want to save.</li>
+</ul>
+<div class="highlight"><span class="filename">app/models.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">groundwork.core.datasources</span> <span class="kn">import</span> <span class="n">SyncedModel</span><span class="p">,</span> <span class="n">SyncConfig</span>
+<span class="kn">from</span> <span class="nn">groundwork.geo.territories.uk</span> <span class="kn">import</span> <span class="n">parliament</span>
+
+<span class="k">class</span> <span class="nc">Constituency</span><span class="p">(</span><span class="n">SyncedModel</span><span class="p">):</span>
+    <span class="c1"># This is where we specify the datasource, along with other options</span>
+    <span class="c1"># for customizing how synchronization happens.</span>
+    <span class="n">sync_config</span> <span class="o">=</span> <span class="n">SyncConfig</span><span class="p">(</span>
+      <span class="n">datasource</span><span class="o">=</span><span class="n">parliament</span><span class="o">.</span><span class="n">constituencies</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># This is used to join data returned from the remote API against</span>
+    <span class="c1"># our local data.</span>
+    <span class="n">external_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+
+    <span class="c1"># This will be populated from the remote data.</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="configure-a-cron-process">Configure a cron process</h3>
+<p>Groundwork comes with a management command for running background cron processes. Where you run it will depend on your
+server setup, but you can launch it by running:</p>
+<div class="highlight"><pre><span></span><code>python manage.py run_cron_tasks
+</code></pre></div>
+<p>This will start a clock process which periodically checks for any pending cron tasks and runs them. It runs until you close it.</p>
+<p>For relatively small projects running on a single instance, you might find it convenient to have a launch script that
+runs the cron process in the background:</p>
+<div class="highlight"><span class="filename">run.sh</span><pre><span></span><code>python manage.py run_cron_tasks <span class="p">&amp;</span> gunicorn app.wsgi
+</code></pre></div>
+<p>Or on larger installations using an IAAS platform like Heroku, you might want to configure a dedicated box to run the
+cron tasks:</p>
+<div class="highlight"><span class="filename">Procfile</span><pre><span></span><code><span class="nt">web</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gunicorn app.wsgi</span><span class="w"></span>
+<span class="nt">clock</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python manage.py run_cron_tasks</span><span class="w"></span>
+</code></pre></div>
+<p>In development, you might want to just run all registered cron tasks then exit. You can do this with the <code>--once</code> flag.
+We'll do that now:</p>
+<div class="highlight"><pre><span></span><code>python manage.py run_cron_tasks --once
+</code></pre></div>
+<p>That's it! You now have a list of UK constituencies saved to your database.</p>
+<p>On its own, this isn't very interesting. To make this more useful, the next tutorial will look at relationships.</p>
+<h3 id="handling-relationships">Handling relationships</h3>
+<p>Often, we find ourselves wanting to preserve relationships between resources we're pulling in from remote APIs.</p>
+<p>Groundwork's SyncedModel supports following relationships on remote resources and recreating them locally. It will do
+this when your model definition has any of:</p>
+<ul>
+<li>A foreign key to another SyncedModel</li>
+<li>A many-many relationship to another SyncedModel</li>
+<li>An inverse relationship to another synced model</li>
+</ul>
+<p>And the resource returned by the datasource has a field mapped to the model field where:</p>
+<ul>
+<li>A <code>str</code>, <code>int</code> or <code>uuuid</code> value that can be passed to the datasource's <code>get</code> method.</li>
+<li>An embedded instance of the related model's resource type.</li>
+<li>In the case of to-many relationship, a list of either of these.</li>
+</ul>
+<p>Let's expand our example to include data about the current MP for the constituencies we just pulled in.</p>
+<div class="highlight"><span class="filename">app/models.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">groundwork.core.datasources</span> <span class="kn">import</span> <span class="n">SyncedModel</span><span class="p">,</span> <span class="n">SyncConfig</span>
+<span class="kn">from</span> <span class="nn">groundwork.geo.territories.uk</span> <span class="kn">import</span> <span class="n">parliament</span>
+
+<span class="k">class</span> <span class="nc">Constituency</span><span class="p">(</span><span class="n">SyncedModel</span><span class="p">):</span>
+    <span class="c1"># This is where we specify the datasource, along with other options</span>
+    <span class="c1"># for customizing how synchronization happens.</span>
+    <span class="n">sync_config</span> <span class="o">=</span> <span class="n">SyncConfig</span><span class="p">(</span>
+      <span class="n">datasource</span><span class="o">=</span><span class="n">parliament</span><span class="o">.</span><span class="n">constituencies</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># This is used to join data returned from the remote API against</span>
+    <span class="c1"># our local data.</span>
+    <span class="n">external_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+
+    <span class="c1"># This will be populated from the remote data.</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+
+    <span class="c1"># This will be populated from the remote data.</span>
+    <span class="n">current_mp</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;MP&#39;</span><span class="p">,</span>
+      <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+      <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_NULL</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">MP</span><span class="p">(</span><span class="n">SyncedModel</span><span class="p">):</span>
+    <span class="c1"># This is where we specify the datasource, along with other options</span>
+    <span class="c1"># for customizing how synchronization happens.</span>
+    <span class="n">sync_config</span> <span class="o">=</span> <span class="n">SyncConfig</span><span class="p">(</span>
+      <span class="n">datasource</span><span class="o">=</span><span class="n">parliament</span><span class="o">.</span><span class="n">members</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># This is used to join data returned from the remote API against</span>
+    <span class="c1"># our local data.</span>
+    <span class="n">external_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+
+    <span class="c1"># This will be populated from the remote data.</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+
+    <span class="c1"># This will be populated from the remote data.</span>
+    <span class="n">thumbnail_url</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">URLField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># This will be populated from the remote data.</span>
+    <span class="n">latest_party</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;Party&#39;</span><span class="p">,</span>
+      <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+      <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_NULL</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Party</span><span class="p">(</span><span class="n">SyncedModel</span><span class="p">):</span>
+    <span class="c1"># This is where we specify the datasource, along with other options</span>
+    <span class="c1"># for customizing how synchronization happens.</span>
+    <span class="n">sync_config</span> <span class="o">=</span> <span class="n">SyncConfig</span><span class="p">(</span>
+      <span class="n">datasource</span><span class="o">=</span><span class="n">parliament</span><span class="o">.</span><span class="n">parties</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># This is used to join data returned from the remote API against</span>
+    <span class="c1"># our local data.</span>
+    <span class="n">external_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+
+    <span class="c1"># This will be populated from the remote data.</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+
+    <span class="c1"># This will be populated from the remote data.</span>
+    <span class="n">background_colour</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+</code></pre></div>
+<p>That's it! Generate and run migrations for the new models, run <code>python manage.py run_cron_tasks --once</code> again and you
+now have the UK's westminster representitives (and their thumbnails) stored in your database.</p>
+<p>We used this example not because it's especially interesting politically, but because it uses an open API that doesn't
+require configuration. However, the same principles here apply to anything – membership databases, event listings, or
+other services specific to your organisation.</p>
+<h2 id="provided-datasources">Provided datasources</h2>
+<ul>
+<li><a href="../../api/groundwork.geo.territories.uk.parliament/">UK Parliament Members &amp; Constituencies</a></li>
+<li><a href="../../api/groundwork.geo.territories.uk.postcodes/">UK Postcode Geocoding</a></li>
+</ul>
+<p>Forthcoming:</p>
+<ul>
+<li>Action Network</li>
+<li>Airtable</li>
+<li>Google Sheets</li>
+<li>Nationbuilder</li>
+<li>Stripe</li>
+</ul>
+<h2 id="writing-your-own-datasource">Writing your own datasource</h2>
+<h3 id="adapting-an-existing-client-library">Adapting an existing client library</h3>
+<p>Many services provide their own Python client library. If the one you're building a datasource for does, it's better to
+simply adapt it in the Datasource interface than reinvent the wheel.</p>
+<p>To do this, extend <a href="../../api/groundwork.core.datasources/#externalresource">Datasource</a>. You need to implement <code>get()</code>
+which should get a resource by id and <code>list()</code>, which should list resources, optionally filtering them.</p>
+<p>Let's do that for a client library for an imaginary service classed <em>ZapMessage</em>.</p>
+<p>Here we're assuming that its client library has a class for each resource type and that these all have a <code>get()</code> and
+<code>filter()</code> class method to fetch from the API:</p>
+<div class="highlight"><span class="filename">app/datasources/zapmessage.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="kn">import</span> <span class="nn">zapmessage</span>
+<span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">groundwork.core.datasources</span> <span class="kn">import</span> <span class="n">Datasource</span>
+
+<span class="c1"># We&#39;re using type hints in this example, but feel free to ignore them if</span>
+<span class="c1"># they&#39;re unfamiliar.</span>
+<span class="n">ResourceT</span> <span class="o">=</span> <span class="n">typing</span><span class="o">.</span><span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;ResourceT&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">ZapMessageResource</span><span class="p">(</span><span class="n">Datasource</span><span class="p">[</span><span class="n">ResourceT</span><span class="p">]):</span>
+  <span class="k">class</span> <span class="nc">NotFoundError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+  <span class="c1"># The Datasource class will set any keyword-args provided to the</span>
+  <span class="c1"># constructor as instance variables. We add this type hint to document</span>
+  <span class="c1"># that this is expected.</span>
+  <span class="n">resource_type</span><span class="p">:</span> <span class="n">zapmessage</span><span class="o">.</span><span class="n">Resource</span>
+
+  <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResourceT</span><span class="p">:</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource_type</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">api_key</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="n">ZapMessageResource</span><span class="o">.</span><span class="n">NotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;not found: </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span>
+
+  <span class="k">def</span> <span class="nf">list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="nb">filter</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">ResourceT</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource_type</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">api_key</span><span class="p">,</span> <span class="o">**</span><span class="nb">filter</span><span class="p">)</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">api_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">setting</span><span class="o">.</span><span class="n">ZAPMESSAGE_API_KEY</span>
+
+
+<span class="n">messages</span><span class="p">:</span> <span class="n">Datasource</span><span class="p">[</span><span class="n">zapmessage</span><span class="o">.</span><span class="n">Message</span><span class="p">]</span> <span class="o">=</span> <span class="n">ZapMessageResource</span><span class="p">(</span>
+  <span class="n">resource_type</span><span class="o">=</span><span class="n">zapmessage</span><span class="o">.</span><span class="n">Message</span>
+<span class="p">)</span>
+
+<span class="n">senders</span><span class="p">:</span> <span class="n">Datasource</span><span class="p">[</span><span class="n">zapmessage</span><span class="o">.</span><span class="n">MessageSender</span><span class="p">]</span> <span class="o">=</span> <span class="n">ZapMessageResource</span><span class="p">(</span>
+  <span class="n">resource_type</span><span class="o">=</span><span class="n">zapmessage</span><span class="o">.</span><span class="n">MessageSender</span>
+<span class="p">)</span>
+
+<span class="n">categories</span><span class="p">:</span> <span class="n">Datasource</span><span class="p">[</span><span class="n">zapmessage</span><span class="o">.</span><span class="n">MessageCategory</span><span class="p">]</span> <span class="o">=</span> <span class="n">ZapMessageResource</span><span class="p">(</span>
+  <span class="n">resource_type</span><span class="o">=</span><span class="n">zapmessage</span><span class="o">.</span><span class="n">MessageCategory</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Now we can pass any of these resource endpoints to any API accepting a Datasource.</p>
+<p>If the client library is designed well (as this one is), it will probably have consistent conventions for how its
+different resources work.</p>
+<p>If so, you can probably just define one class adopting the API's overall conventions and customize those using parameters to instances for individual resources.</p>
+<p>A real-world example will obviously differ, and may introduce a few inconsistencies that you need to work around but
+hopefully this gives you a good starting point!</p>
+<h3 id="calling-a-rest-api">Calling a REST API</h3>
+<p>Let's imagine that <em>ZapMessage</em> didn't provide a Python library and we needed to use its REST API instead.</p>
+<p>To do this, we'll need to:</p>
+<ul>
+<li>Define data classes for each resource.</li>
+<li>If we need specify headers or otherwise customize how API calls are made, subclass RestDatasource with our
+  customizations.</li>
+</ul>
+<div class="highlight"><span class="filename">app/datasources/zapmessage.py</span><pre><span></span><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">groundwork.core.datasources</span> <span class="kn">import</span> <span class="n">RestDatasource</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Message</span><span class="p">:</span>
+  <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">sender_id</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">category_id</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">timestamp</span><span class="p">:</span> <span class="n">datetime</span>
+  <span class="n">content</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MessageSender</span><span class="p">:</span>
+  <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MessageSender</span><span class="p">:</span>
+  <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="c1"># We&#39;re using type hints in this example, but feel free to ignore them if</span>
+<span class="c1"># they&#39;re unfamiliar.</span>
+<span class="n">ResourceT</span> <span class="o">=</span> <span class="n">typing</span><span class="o">.</span><span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;ResourceT&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">ZapMessageResource</span><span class="p">(</span><span class="n">RestDatasource</span><span class="p">[</span><span class="n">ResourceT</span><span class="p">]):</span>
+  <span class="n">base_url</span> <span class="o">=</span> <span class="s1">&#39;https://api.zapmessage.io&#39;</span>
+
+  <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Bearer </span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">ZAPMESSAGE_API_KEY</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">}</span>
+
+<span class="n">messages</span><span class="p">:</span> <span class="n">RestDatasource</span><span class="p">[</span><span class="n">Message</span><span class="p">]</span> <span class="o">=</span> <span class="n">ZapMessageResource</span><span class="p">(</span>
+  <span class="n">path</span><span class="o">=</span><span class="s1">&#39;/messages&#39;</span><span class="p">,</span>
+  <span class="n">resource_type</span><span class="o">=</span><span class="n">Message</span>
+<span class="p">)</span>
+
+<span class="n">senders</span><span class="p">:</span> <span class="n">RestDatasource</span><span class="p">[</span><span class="n">MessageSender</span><span class="p">]</span> <span class="o">=</span> <span class="n">ZapMessageResource</span><span class="p">(</span>
+  <span class="n">path</span><span class="o">=</span><span class="s1">&#39;/senders&#39;</span><span class="p">,</span>
+  <span class="n">resource_type</span><span class="o">=</span><span class="n">MessageSender</span>
+<span class="p">)</span>
+
+<span class="n">categories</span><span class="p">:</span> <span class="n">RestDatasource</span><span class="p">[</span><span class="n">MessageCategory</span><span class="p">]</span> <span class="o">=</span> <span class="n">ZapMessageResource</span><span class="p">(</span>
+  <span class="n">path</span><span class="o">=</span><span class="s1">&#39;/categories&#39;</span><span class="p">,</span>
+  <span class="n">resource_type</span><span class="o">=</span><span class="n">MessageCategory</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>So far, so good! One additional customization we will often make is to define how list responses are handled.
+By default, RestClient's list() call will expect to be returned a list of resources with no pagination.</p>
+<p>Here's how we might do that:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ZapMessageResource</span><span class="p">(</span><span class="n">RestDatasource</span><span class="p">[</span><span class="n">ResourceT</span><span class="p">]):</span>
+  <span class="n">base_url</span> <span class="o">=</span> <span class="s1">&#39;https://api.zapmessage.io&#39;</span>
+
+  <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Bearer </span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">ZAPMESSAGE_API_KEY</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">}</span>
+
+  <span class="k">def</span> <span class="nf">paginate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">query</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">total_pages</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">while</span> <span class="n">total_pages</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">page</span> <span class="o">&lt;=</span> <span class="n">total_pages</span><span class="o">&gt;</span><span class="p">:</span>
+      <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">)</span>
+      <span class="n">total_pages</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;total_pages&#39;</span><span class="p">]</span>
+
+      <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">]:</span>
+        <span class="k">yield</span> <span class="n">item</span>
+</code></pre></div>
+<p>You can see the full set of options and override points in
+<a href="../../api/groundwork.core.datasources/#restclient">RestClient</a>'s API documentation.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../getting-started/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting Started" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Getting Started
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../api/groundwork.core.datasources/" class="md-footer__link md-footer__link--next" aria-label="Next: Data sources" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Data sources
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Groundwork is made by <a href="https://commonknowledge.coop/" target="_blank">
+            Common Knowledge
+          </a>
+        
+        
+      </div>
+      <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/commonknowledge" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+</div>
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d6c3db9e.min.js"></script>
+      
+    
+  </body>
+</html>
