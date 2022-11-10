@@ -41,6 +41,7 @@ schedule = "^1.1.0"
 djangorestframework-camel-case = "^1.2.0"
 djangorestframework-dataclasses = "^1.0.0"
 wheel = "^0.38.0"
+safety = "*"
 
 [tool.poetry.dev-dependencies]
 django = '^4.1'
@@ -61,7 +62,6 @@ pylint = "^2.10.2"
 pytest = "^7.1.1"
 pytest-django = "^4.4.0"
 pyupgrade = "^2.24.0"
-safety = "^2.3.1"
 
 [tool.black]
 # https://github.com/psf/black
