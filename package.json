@@ -1,6 +1,6 @@
 {
   "name": "groundwork-django",
-  "version": "0.2.0",
+  "version": "0.1.6",
   "repository": "https://github.com/commonknowledge/groundwork.git",
   "description": "An integrated Django and Javascript framework for people who build tools for organisers.",
   "author": "Common Knowledge <developers@commonknowledge.coop>",
