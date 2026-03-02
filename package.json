@@ -34,7 +34,7 @@
     "prettier": "^2.4.1",
     "ts-jest": "^27.0.7",
     "typescript": "^4.4.4",
-    "vite": "^2.6.14",
+    "vite": "^5.4.21",
     "vite-plugin-dynamic-publicpath": "^1.1.0"
   },
   "peerDependencies": {
