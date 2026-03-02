@@ -18,7 +18,7 @@
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-typescript": "^7.16.0",
     "@hotwired/stimulus": "^3.0.1",
-    "@hotwired/turbo": "^7.0.1",
+    "@hotwired/turbo": "^8.0.23",
     "@microsoft/api-extractor": "^7.18.20",
     "@testing-library/dom": "^8.11.1",
     "@types/jest": "^27.0.3",
