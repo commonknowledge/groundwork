@@ -1,8 +1,4 @@
-import {
-  Application,
-  Controller,
-  ControllerConstructor,
-} from "@hotwired/stimulus";
+import { Application, ControllerConstructor } from "@hotwired/stimulus";
 import StimulusControllerResolver from "stimulus-controller-resolver";
 
 /**
@@ -16,7 +12,7 @@ export function startApp(...modules: AsyncModuleMap[]) {
   const allModules: AsyncModuleMap = Object.assign(
     {},
     EXPORTED_MODULES,
-    ...modules
+    ...modules,
   );
 
   const resolver = createAsyncControllerResolver(allModules);
@@ -38,20 +34,25 @@ const createAsyncControllerResolver = (pathMap: AsyncModuleMap) => {
       }
 
       return [];
-    })
+    }),
   );
 
   return async (key: string) => {
     const module = await identifierMap[key]?.();
     if (!module) {
       throw Error(
-        `Controller not found: ${key}. Have you named the file ${key}-controller.ts?`
+        `Controller not found: ${key}. Have you named the file ${key}-controller.ts?`,
       );
     }
 
-    if (!module.default || !(module.default.prototype instanceof Controller)) {
+    if (
+      !module.default ||
+      typeof module.default !== "function" ||
+      typeof module.default.prototype.connect !== "function" ||
+      typeof module.default.prototype.disconnect !== "function"
+    ) {
       throw Error(
-        `Module ${key} should have as its default export a subclass of Controller`
+        `Module ${key} should have as its default export a subclass of Controller`,
       );
     }
 
